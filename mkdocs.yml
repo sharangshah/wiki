@@ -1,0 +1,92 @@
+site_name: Sharang's Wiki
+site_description: A personal knowledge base — research, thinking, and evolving ideas.
+site_author: Sharang
+
+# Privacy: prevent indexing
+extra:
+  generator: false
+
+theme:
+  name: material
+  custom_dir: overrides
+  favicon: assets/favicon.png
+  logo: assets/logo.png
+
+  palette:
+    - scheme: sharang
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: sharang-dark
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+
+  font: false  # We load our own fonts via CSS
+
+  features:
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - navigation.indexes
+    - search.suggest
+    - search.highlight
+    - content.action.edit
+    - toc.follow
+
+  icon:
+    repo: fontawesome/brands/github
+
+plugins:
+  - search
+  - tags
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.critic
+  - pymdownx.mark
+  - pymdownx.tilde
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+      toc_depth: 3
+  - def_list
+  - footnotes
+
+extra_css:
+  - stylesheets/brand.css
+
+# Navigation structure
+nav:
+  - Home: index.md
+  - Wealth:
+    - wealth/index.md
+    - Equity Research:
+      - wealth/equity-research/index.md
+    - Portfolio & Strategy:
+      - wealth/portfolio/index.md
+    - Macro & Markets:
+      - wealth/macro/index.md
+  - Health:
+    - health/index.md
+    - Ayurveda:
+      - health/ayurveda/index.md
+    - Nutrition:
+      - health/nutrition/index.md
+    - Fitness:
+      - health/fitness/index.md
+  - Psychology:
+    - psychology/index.md
+  - Geopolitics:
+    - geopolitics/index.md
+  - Philosophy:
+    - philosophy/index.md
+  - Cross-Domain:
+    - cross-domain/index.md
+  - Changelog: changelog.md

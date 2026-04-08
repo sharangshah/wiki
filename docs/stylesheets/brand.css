@@ -1,0 +1,399 @@
+/* ═══════════════════════════════════════════════════════
+   Sharang Wiki — Brand Design System
+   Palette: Deep Navy + Gold + Off-White
+   Typography: Libre Baskerville (display) + Inter (data)
+   Taste dials: DESIGN_VARIANCE=2, MOTION_INTENSITY=2, VISUAL_DENSITY=2
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Brand Tokens ── */
+:root {
+  --navy: #0A2240;
+  --navy-90: rgba(10, 34, 64, 0.9);
+  --navy-70: rgba(10, 34, 64, 0.7);
+  --navy-15: rgba(10, 34, 64, 0.15);
+  --navy-08: rgba(10, 34, 64, 0.08);
+  --gold: #B5985A;
+  --gold-70: rgba(181, 152, 90, 0.7);
+  --gold-30: rgba(181, 152, 90, 0.3);
+  --blue: #154C8A;
+  --body: #333333;
+  --off-white: #F5F3F0;
+  --gray: #E5E2DD;
+  --warm-gray: #8C857B;
+  --cool-gray: #6B7280;
+  --sage: #6B8E6B;
+  --coral: #C45B3E;
+  --white: #FFFFFF;
+}
+
+/* ── Font Loading ── */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ══════════════════════════════════════
+   LIGHT THEME — [data-md-color-scheme="sharang"]
+   ══════════════════════════════════════ */
+
+[data-md-color-scheme="sharang"] {
+  --md-primary-fg-color: var(--navy);
+  --md-primary-bg-color: var(--white);
+  --md-accent-fg-color: var(--gold);
+  --md-default-fg-color: var(--body);
+  --md-default-bg-color: var(--white);
+  --md-typeset-color: var(--body);
+  --md-typeset-a-color: var(--blue);
+  --md-code-bg-color: var(--off-white);
+  --md-footer-bg-color: var(--navy);
+  --md-footer-fg-color: var(--white);
+}
+
+/* ══════════════════════════════════════
+   DARK THEME — [data-md-color-scheme="sharang-dark"]
+   ══════════════════════════════════════ */
+
+[data-md-color-scheme="sharang-dark"] {
+  --md-primary-fg-color: var(--off-white);
+  --md-primary-bg-color: var(--navy);
+  --md-accent-fg-color: var(--gold);
+  --md-default-fg-color: #E0DDD8;
+  --md-default-bg-color: #0D1B2A;
+  --md-typeset-color: #E0DDD8;
+  --md-typeset-a-color: var(--gold);
+  --md-code-bg-color: rgba(255, 255, 255, 0.06);
+  --md-footer-bg-color: #060E18;
+  --md-footer-fg-color: var(--off-white);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-header {
+  background-color: var(--navy);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-nav--primary .md-nav__item--active > .md-nav__link {
+  color: var(--gold);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-sidebar {
+  background-color: #0D1B2A;
+}
+
+/* ── Typography ── */
+
+.md-typeset {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  color: var(--body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset {
+  color: #E0DDD8;
+}
+
+.md-typeset h1 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 1.8rem;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  margin-top: 0;
+  border-bottom: 2px solid var(--gold);
+  padding-bottom: 0.6rem;
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset h1 {
+  color: var(--off-white);
+  border-bottom-color: var(--gold-70);
+}
+
+.md-typeset h2 {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 1.3rem;
+  letter-spacing: -0.005em;
+  margin-top: 2.4rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--gray);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset h2 {
+  color: var(--off-white);
+  border-bottom-color: rgba(255,255,255,0.1);
+}
+
+.md-typeset h3 {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 600;
+  color: var(--blue);
+  font-size: 1.05rem;
+  text-transform: none;
+  margin-top: 1.8rem;
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset h3 {
+  color: var(--gold);
+}
+
+/* ── Header Bar ── */
+
+.md-header {
+  background-color: var(--navy);
+  box-shadow: 0 1px 0 rgba(181, 152, 90, 0.2);
+}
+
+.md-header__title {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ── Search ── */
+
+.md-search__input {
+  font-family: 'Inter', Arial, sans-serif;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.md-search__input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ── Navigation ── */
+
+.md-nav {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 0.78rem;
+}
+
+.md-nav__link {
+  color: var(--body) !important;
+  transition: color 180ms ease-in-out;
+}
+
+[data-md-color-scheme="sharang-dark"] .md-nav__link {
+  color: #B0ADA8 !important;
+}
+
+.md-nav__link:hover {
+  color: var(--navy) !important;
+}
+
+[data-md-color-scheme="sharang-dark"] .md-nav__link:hover {
+  color: var(--gold) !important;
+}
+
+.md-nav__item--active > .md-nav__link {
+  color: var(--navy) !important;
+  font-weight: 600;
+}
+
+/* ── Sidebar ── */
+
+.md-sidebar {
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+.md-sidebar--primary {
+  border-right: 1px solid var(--gray);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-sidebar--primary {
+  border-right-color: rgba(255,255,255,0.06);
+}
+
+/* ── Content Area ── */
+
+.md-main__inner {
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+.md-content {
+  padding-top: 1.5rem;
+}
+
+/* ── Links ── */
+
+.md-typeset a {
+  color: var(--blue);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 180ms ease-in-out, color 180ms ease-in-out;
+}
+
+.md-typeset a:hover {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset a {
+  color: var(--gold);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset a:hover {
+  color: var(--off-white);
+  border-bottom-color: var(--gold-70);
+}
+
+/* ── Tables ── */
+
+.md-typeset table:not([class]) {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 0.8rem;
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1.5rem 0;
+}
+
+.md-typeset table:not([class]) th {
+  background-color: var(--navy);
+  color: var(--white);
+  font-weight: 600;
+  text-transform: none;
+  padding: 0.65rem 0.9rem;
+  text-align: left;
+  border: none;
+}
+
+.md-typeset table:not([class]) td {
+  padding: 0.55rem 0.9rem;
+  border-bottom: 1px solid var(--gray);
+  color: var(--body);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset table:not([class]) td {
+  border-bottom-color: rgba(255,255,255,0.08);
+  color: #E0DDD8;
+}
+
+.md-typeset table:not([class]) tbody tr:nth-child(even) {
+  background-color: var(--off-white);
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset table:not([class]) tbody tr:nth-child(even) {
+  background-color: rgba(255,255,255,0.03);
+}
+
+/* ── Admonitions (callout boxes) ── */
+
+.md-typeset .admonition,
+.md-typeset details {
+  border-left: 3px solid var(--gold);
+  background-color: var(--off-white);
+  border-radius: 0;
+  box-shadow: none;
+  font-size: 0.85rem;
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset .admonition,
+[data-md-color-scheme="sharang-dark"] .md-typeset details {
+  background-color: rgba(255,255,255,0.04);
+}
+
+.md-typeset .admonition-title,
+.md-typeset summary {
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 600;
+  background-color: transparent;
+  border: none;
+}
+
+/* ── Blockquotes ── */
+
+.md-typeset blockquote {
+  border-left: 3px solid var(--gold);
+  padding: 0.6rem 1.2rem;
+  color: var(--warm-gray);
+  font-style: italic;
+  background: transparent;
+}
+
+/* ── Code blocks ── */
+
+.md-typeset code {
+  font-family: 'Source Code Pro', 'Courier New', monospace;
+  font-size: 0.82rem;
+  background-color: var(--off-white);
+  border: 1px solid var(--gray);
+  border-radius: 2px;
+  padding: 0.1em 0.35em;
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset code {
+  background-color: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.1);
+}
+
+/* ── Footer ── */
+
+.md-footer {
+  background-color: var(--navy);
+  border-top: 1px solid var(--gold-30);
+}
+
+.md-footer-meta {
+  background-color: var(--navy);
+}
+
+/* ── Tags ── */
+
+.md-typeset .md-tag {
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  background-color: var(--navy-08);
+  color: var(--navy);
+  border: 1px solid var(--navy-15);
+  border-radius: 2px;
+  padding: 0.15em 0.5em;
+  letter-spacing: 0.03em;
+}
+
+[data-md-color-scheme="sharang-dark"] .md-typeset .md-tag {
+  background-color: rgba(181,152,90,0.12);
+  color: var(--gold);
+  border-color: rgba(181,152,90,0.25);
+}
+
+/* ── Horizontal Rules ── */
+
+.md-typeset hr {
+  border: none;
+  border-top: 1px solid var(--gray);
+  margin: 2rem 0;
+}
+
+/* ── Last Updated + Meta ── */
+
+.md-source-file {
+  font-family: 'Inter', Arial, sans-serif;
+}
+
+/* ── Reduced Motion ── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* ── Print ── */
+
+@media print {
+  .md-header, .md-footer, .md-sidebar {
+    display: none !important;
+  }
+  .md-typeset {
+    font-size: 10pt;
+    color: #000;
+  }
+  .md-typeset h1 {
+    border-bottom-color: #B5985A;
+  }
+}
+
+/* ── Noindex Meta (privacy) ── */
+/* Handled via overrides/main.html */
