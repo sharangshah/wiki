@@ -1028,6 +1028,10 @@ body::before {
   transform: translateX(-50%);
   text-align: center;
   white-space: nowrap;
+  width: max-content;
+}
+.md-header__title .md-ellipsis {
+  overflow: visible;
 }
 /* Search stays at right edge */
 .md-search {
