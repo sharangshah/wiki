@@ -1,56 +1,56 @@
 site_name: Sharang's Wiki
 site_description: A personal knowledge base — research, thinking, and evolving ideas.
 site_author: Sharang
+site_url: https://sharangshah.github.io/wiki/
 
 extra:
-  generator: false
+    generator: false
 
 theme:
-  name: material
-  custom_dir: overrides
-  favicon: assets/favicon.png
-  logo: assets/logo.png
-  palette:
-    - scheme: slate
-      toggle:
-        icon: material/brightness-7
-        name: Switch to light mode
-    - scheme: default
-      toggle:
-        icon: material/brightness-4
-        name: Switch to dark mode
-  font: false
-  features:
-    - navigation.sections
-    - navigation.top
-    - navigation.indexes
-    - search.suggest
-    - search.highlight
-    - toc.follow
+    name: material
+    custom_dir: overrides
+    favicon: assets/favicon.png
+    palette:
+      - scheme: slate
+        toggle:
+          icon: material/brightness-7
+          name: Switch to light mode
+      - scheme: default
+        toggle:
+          icon: material/brightness-4
+          name: Switch to dark mode
+    font: false
+    features:
+      - navigation.sections
+      - navigation.top
+      - navigation.indexes
+      - search.suggest
+      - search.highlight
+      - toc.follow
 
 plugins:
-  - search
+    - search
 
 markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - attr_list
-  - md_in_html
-  - tables
-  - toc:
-      permalink: true
-      toc_depth: 3
+    - admonition
+    - pymdownx.details
+    - pymdownx.superfences
+    - attr_list
+    - md_in_html
+    - tables
+    - toc:
+        permalink: true
+        toc_depth: 3
 
 extra_css:
-  - stylesheets/brand.css
+    - stylesheets/brand.css
 
 nav:
-  - Home: index.md
-  - Wealth:
-    - wealth/index.md
-    - Equity Research:
-      - wealth/equity-research/index.md
-  - Health:
-    - health/index.md
-  - Changelog: changelog.md
+    - Home: index.md
+    - Wealth:
+      - wealth/index.md
+      - Equity Research:
+        - wealth/equity-research/index.md
+    - Health:
+      - health/index.md
+    - Changelog: changelog.md
