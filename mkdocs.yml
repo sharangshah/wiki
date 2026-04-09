@@ -14,7 +14,6 @@ theme:
       scheme: slate
     font: false
     features:
-      - navigation.sections
       - navigation.top
       - navigation.indexes
       - search.suggest
