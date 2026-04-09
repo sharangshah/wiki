@@ -1,717 +1,877 @@
-/* ═══════════════════════════════════════════════════════
-   Sharang Wiki — Premium Editorial Design System
-   Philosophy: Restraint signals command.
-   Palette: Deep Navy · Gold · Warm Parchment
-   Typography: Libre Baskerville (editorial) + Inter (functional)
-   Taste: DESIGN_VARIANCE=2  MOTION_INTENSITY=2  VISUAL_DENSITY=1
-   ═══════════════════════════════════════════════════════ */
+/* ============================================================================
+   SHARANG’S WIKI — BRAND SYSTEM
+   Dark-first, luxury editorial design system inspired by Vigilis
+   ============================================================================ */
 
-/* ── Brand Tokens ── */
+/* @import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500&display=swap');
+
+/* ============================================================================
+   1. CSS CUSTOM PROPERTIES — Brand Tokens
+   ============================================================================ */
+
 :root {
-  --navy:       #0A2240;
-  --navy-90:    rgba(10, 34, 64, 0.9);
-  --navy-70:    rgba(10, 34, 64, 0.7);
-  --navy-40:    rgba(10, 34, 64, 0.4);
-  --navy-15:    rgba(10, 34, 64, 0.15);
-  --navy-08:    rgba(10, 34, 64, 0.08);
-  --navy-04:    rgba(10, 34, 64, 0.04);
-  --gold:       #B5985A;
-  --gold-70:    rgba(181, 152, 90, 0.7);
-  --gold-30:    rgba(181, 152, 90, 0.3);
-  --gold-15:    rgba(181, 152, 90, 0.15);
-  --gold-08:    rgba(181, 152, 90, 0.08);
-  --blue:       #154C8A;
-  --body:       #3D4F63;
-  --body-light: #5A6B7D;
-  --parchment:  #FAF8F5;
-  --off-white:  #F5F3F0;
-  --gray:       #E8E5E0;
-  --warm-gray:  #8C857B;
-  --cool-gray:  #6B7280;
-  --sage:       #6B8E6B;
-  --coral:      #C45B3E;
-  --white:      #FFFFFF;
+  /* Color Palette — Dark-First */
+  --color-midnight: #0D1F35;
+  --color-parchment: #F7F3EC;
+  --color-gold: #B5985A;
+  --color-slate: #3D4F63;
+  --color-deep: #162840;
+  --color-pewter: #7A8899;
+  --color-mist: #C9C5BD;
+
+  /* Opacity variants for brand colors */
+  --color-gold-light: rgba(181, 152, 90, 0.1);
+  --color-gold-medium: rgba(181, 152, 90, 0.2);
+  --color-gold-focus: rgba(181, 152, 90, 0.3);
+  --color-parchment-dim: rgba(247, 243, 236, 0.82);
+  --color-parchment-muted: rgba(247, 243, 236, 0.55);
+  --color-midnight-fade: rgba(13, 31, 53, 0.05);
+
+  /* Typography */
+  --font-display: 'Libre Baskerville', serif;
+  --font-body: 'Libre Baskerville', serif;
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing (8pt grid) */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 32px;
+  --space-xl: 40px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 80px;
+  --space-5xl: 96px;
+  --space-6xl: 128px;
+
+  /* Layout */
+  --content-max-width: 720px;
+  --sidebar-width: 250px;
+
+  /* Motion */
+  --motion-duration: 150ms;
+  --motion-easing: cubic-bezier(0.4, 0.0, 0.2, 1);
+
+  /* Shadows */
+  --shadow-subtle: 0 2px 8px rgba(13, 31, 53, 0.08);
+  --shadow-card: 0 4px 16px rgba(13, 31, 53, 0.12);
+  --shadow-modal: 0 16px 48px rgba(13, 31, 53, 0.2);
 }
 
-/* ── Font Loading ── */
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap');
-
-/* ══════════════════════════════════════
-   LIGHT THEME
-   Warm parchment. Quiet authority.
-   ══════════════════════════════════════ */
-
-[data-md-color-scheme="sharang"] {
-  --md-primary-fg-color:    var(--navy);
-  --md-primary-bg-color:    var(--parchment);
-  --md-accent-fg-color:     var(--gold);
-  --md-default-fg-color:    var(--body);
-  --md-default-bg-color:    var(--parchment);
-  --md-typeset-color:       var(--body);
-  --md-typeset-a-color:     var(--navy);
-  --md-code-bg-color:       var(--off-white);
-  --md-footer-bg-color:     var(--navy);
-  --md-footer-fg-color:     var(--off-white);
+:root[data-theme="light"] {
+  --color-bg-primary: #FAF8F5;
+  --color-bg-secondary: #FFFFFF;
+  --color-text-primary: var(--color-slate);
+  --color-text-secondary: var(--color-pewter);
+  --color-border: rgba(61, 79, 99, 0.1);
 }
 
-/* ══════════════════════════════════════
-   DARK THEME
-   Midnight + parchment. Vigilis-inspired.
-   ══════════════════════════════════════ */
-
-[data-md-color-scheme="sharang-dark"] {
-  --md-primary-fg-color:    #F0EDE8;
-  --md-primary-bg-color:    #0D1B2A;
-  --md-accent-fg-color:     var(--gold);
-  --md-default-fg-color:    #C5CDD8;
-  --md-default-bg-color:    #0D1B2A;
-  --md-typeset-color:       #C5CDD8;
-  --md-typeset-a-color:     var(--gold);
-  --md-code-bg-color:       rgba(255, 255, 255, 0.05);
-  --md-footer-bg-color:     #060E18;
-  --md-footer-fg-color:     #7A8899;
+:root,
+:root[data-theme="dark"] {
+  --color-bg-primary: var(--color-midnight);
+  --color-bg-secondary: var(--color-deep);
+  --color-text-primary: var(--color-parchment-dim);
+  --color-text-secondary: var(--color-pewter);
+  --color-border: rgba(181, 152, 90, 0.15);
 }
 
-[data-md-color-scheme="sharang-dark"] .md-header {
-  background: #0D1B2A;
-  border-bottom: 1px solid rgba(192, 154, 82, 0.08);
+/* ============================================================================
+   2. MkDocs Material Scheme Overrides
+   ============================================================================ */
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: var(--color-midnight);
+  --md-primary-fg-color--light: var(--color-deep);
+  --md-primary-fg-color--dark: #000000;
+  --md-accent-fg-color: var(--color-gold);
+  --md-accent-fg-color--transparent: var(--color-gold-light);
+  --md-default-bg-color: var(--color-midnight);
+  --md-default-fg-color: var(--color-parchment);
+  --md-default-fg-color--light: var(--color-parchment-muted);
+  --md-default-fg-color--lighter: var(--color-pewter);
+  --md-code-bg-color: var(--color-deep);
+  --md-code-fg-color: var(--color-parchment);
+  --md-code-hl-color: var(--color-gold-light);
+  --md-code-hl-name-color: var(--color-parchment);
+  --md-code-hl-number-color: #FFD700;
+  --md-code-hl-special-color: var(--color-gold);
+  --md-typeset-a-color: var(--color-parchment);
+  --md-typeset-mark-color: var(--color-gold-light);
+  --md-footer-bg-color: var(--color-midnight);
+  --md-footer-fg-color: rgba(247, 243, 236, 0.15);
+  --md-shadow-z1: var(--shadow-subtle);
+  --md-shadow-z2: var(--shadow-card);
 }
 
-[data-md-color-scheme="sharang-dark"] .md-sidebar {
-  background: #0D1B2A;
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #FAF8F5;
+  --md-primary-fg-color--light: #FFFFFF;
+  --md-primary-fg-color--dark: #F0EDEA;
+  --md-accent-fg-color: var(--color-slate);
+  --md-accent-fg-color--transparent: rgba(61, 79, 99, 0.08);
+  --md-default-bg-color: #FAF8F5;
+  --md-default-fg-color: var(--color-slate);
+  --md-default-fg-color--light: var(--color-pewter);
+  --md-default-fg-color--lighter: rgba(122, 136, 153, 0.7);
+  --md-code-bg-color: #FFFFFF;
+  --md-code-fg-color: var(--color-slate);
+  --md-code-hl-color: rgba(181, 152, 90, 0.12);
+  --md-code-hl-name-color: var(--color-slate);
+  --md-code-hl-number-color: #8B6F47;
+  --md-code-hl-special-color: var(--color-gold);
+  --md-typeset-a-color: var(--color-slate);
+  --md-typeset-mark-color: rgba(181, 152, 90, 0.2);
+  --md-footer-bg-color: #FFFFFF;
+  --md-footer-fg-color: rgba(61, 79, 99, 0.4);
+  --md-shadow-z1: 0 2px 8px rgba(13, 31, 53, 0.05);
+  --md-shadow-z2: 0 4px 16px rgba(13, 31, 53, 0.08);
 }
 
-[data-md-color-scheme="sharang-dark"] .md-main {
-  background: #0D1B2A;
-}
+/* ============================================================================
+   3. Root & Body Styles
+   ============================================================================ */
 
-/* ══════════════════════════════════════
-   TYPOGRAPHY — The #1 differentiator
-   Light weight = confidence.
-   ══════════════════════════════════════ */
-
-.md-typeset {
-  font-family: 'Libre Baskerville', Georgia, serif;
-  font-size: 0.95rem;
-  line-height: 1.82;
-  color: var(--body);
+html {
+  font-family: var(--font-body);
+  font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  letter-spacing: 0.005em;
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset {
-  color: #C5CDD8;
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  transition: background-color var(--motion-duration) var(--motion-easing),
+              color var(--motion-duration) var(--motion-easing);
 }
 
-/* H1 — The one moment per page. Gold rule earned. */
-.md-typeset h1 {
-  font-family: 'Libre Baskerville', Georgia, serif;
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+::selection {
+  background-color: var(--color-gold-medium);
+  color: var(--color-parchment);
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background-color: var(--color-mist); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background-color: var(--color-pewter); }
+
+/* ============================================================================
+   4. Typography — Headlines, Body, Labels
+   ============================================================================ */
+
+h1 {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
   font-weight: 400;
-  color: var(--navy);
-  font-size: 2rem;
-  letter-spacing: -0.015em;
   line-height: 1.2;
-  margin: 0 0 2rem 0;
-  padding-bottom: 1.2rem;
-  border-bottom: 1.5px solid var(--gold);
+  letter-spacing: -0.02em;
+  color: var(--color-parchment);
+  margin-top: 0;
+  margin-bottom: var(--space-lg);
+  text-rendering: optimizeLegibility;
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset h1 {
-  color: #F0EDE8;
-  border-bottom-color: rgba(192, 154, 82, 0.4);
-}
-
-/* H2 — Section anchors. Quiet separation. */
-.md-typeset h2 {
-  font-family: 'Libre Baskerville', Georgia, serif;
+h2 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
   font-weight: 400;
-  color: var(--navy);
-  font-size: 1.35rem;
-  letter-spacing: -0.01em;
   line-height: 1.3;
-  margin-top: 3.5rem;
-  margin-bottom: 1rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid var(--gray);
+  letter-spacing: -0.01em;
+  color: var(--color-parchment);
+  margin-top: var(--space-3xl);
+  margin-bottom: var(--space-md);
+  text-rendering: optimizeLegibility;
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset h2 {
-  color: #E8E3DC;
-  border-bottom-color: rgba(255, 255, 255, 0.06);
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-parchment);
+  margin-top: var(--space-2xl);
+  margin-bottom: var(--space-sm);
 }
 
-/* H3 — Functional labels. Sans-serif. Understated. */
-.md-typeset h3 {
-  font-family: 'Inter', Arial, sans-serif;
-  font-weight: 500;
-  color: var(--navy-70);
+h4, h5, h6 {
+  font-family: var(--font-ui);
   font-size: 0.95rem;
-  letter-spacing: 0.02em;
-  margin-top: 2.5rem;
-  margin-bottom: 0.5rem;
-}
-
-[data-md-color-scheme="sharang-dark"] .md-typeset h3 {
-  color: var(--gold-70);
-}
-
-/* H4 — Whisper-weight labels */
-.md-typeset h4 {
-  font-family: 'Inter', Arial, sans-serif;
   font-weight: 500;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--warm-gray);
-  margin-top: 2rem;
-  margin-bottom: 0.4rem;
+  color: var(--color-parchment);
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset h4 {
-  color: rgba(192, 154, 82, 0.5);
+p {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
 }
 
-/* Paragraphs — generous breathing room */
-.md-typeset p {
-  margin-bottom: 1.3rem;
-}
-
-/* Strong — Navy, not bold-black */
-.md-typeset strong {
-  color: var(--navy);
-  font-weight: 700;
-}
-
-[data-md-color-scheme="sharang-dark"] .md-typeset strong {
-  color: #E8E3DC;
-}
-
-/* Emphasis — italic, slightly warmer */
-.md-typeset em {
-  color: inherit;
+.lede {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  font-weight: 400;
   font-style: italic;
+  line-height: 1.8;
+  color: var(--color-pewter);
+  margin-bottom: var(--space-lg);
 }
 
-/* ══════════════════════════════════════
-   HEADER — Tall. Quiet. Editorial.
-   ══════════════════════════════════════ */
+.section-label {
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  display: block;
+  margin-bottom: var(--space-sm);
+  margin-top: var(--space-xl);
+}
+
+strong, b {
+  font-weight: 700;
+  color: var(--color-parchment);
+}
+
+em, i {
+  font-style: italic;
+  color: var(--color-text-primary);
+}
+
+/* ============================================================================
+   5. Content Layout & Whitespace
+   ============================================================================ */
+
+.md-content {
+  max-width: var(--content-max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: var(--space-4xl);
+  padding-left: var(--space-lg);
+  padding-right: var(--space-lg);
+  padding-bottom: var(--space-4xl);
+}
+
+[data-md-color-scheme="default"] .md-content {
+  padding-top: var(--space-4xl);
+}
+
+.md-typeset {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.85;
+  color: var(--color-text-primary);
+}
+
+.md-typeset h1 {
+  font-size: 2.8rem;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--color-parchment);
+}
+
+.md-typeset h2 {
+  font-size: 1.75rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-parchment);
+}
+
+/* ============================================================================
+   6. Header & Navigation
+   ============================================================================ */
 
 .md-header {
-  background: var(--navy);
+  background-color: var(--color-midnight);
+  border-bottom: 1px solid rgba(181, 152, 90, 0.15);
   box-shadow: none;
-  border-bottom: 1px solid rgba(181, 152, 90, 0.12);
-  height: 56px;
+  transition: background-color var(--motion-duration) var(--motion-easing);
+}
+
+[data-md-color-scheme="default"] .md-header {
+  background-color: #FFFFFF;
+  border-bottom-color: rgba(61, 79, 99, 0.1);
 }
 
 .md-header__title {
-  font-family: 'Libre Baskerville', Georgia, serif;
+  font-family: var(--font-display);
+  font-size: 1.25rem;
   font-weight: 400;
-  font-size: 1rem;
-  letter-spacing: 0.04em;
-  opacity: 0.9;
+  letter-spacing: -0.01em;
+  color: var(--color-parchment);
 }
 
-/* ── Search — Minimal ── */
-
-.md-search__input {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 0.82rem;
-  font-weight: 400;
-  background-color: rgba(255, 255, 255, 0.06);
-  border-radius: 2px;
+[data-md-color-scheme="default"] .md-header__title {
+  color: var(--color-slate);
 }
-
-.md-search__input::placeholder {
-  color: rgba(255, 255, 255, 0.35);
-  font-weight: 300;
-  letter-spacing: 0.03em;
-}
-
-/* ══════════════════════════════════════
-   NAVIGATION — A fine book's table of contents.
-   ══════════════════════════════════════ */
 
 .md-nav {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 0.76rem;
-  line-height: 1.5;
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 400;
 }
 
 .md-nav__link {
-  color: var(--body-light) !important;
-  font-weight: 400;
-  letter-spacing: 0.01em;
-  transition: opacity 200ms ease;
-  padding: 0.45rem 0.8rem;
+  color: var(--color-parchment-muted);
+  transition: color var(--motion-duration) var(--motion-easing);
 }
 
-[data-md-color-scheme="sharang-dark"] .md-nav__link {
-  color: #7A8899 !important;
+.md-nav__link:hover { color: var(--color-gold); }
+.md-nav__link--active { color: var(--color-gold); font-weight: 500; }
+
+[data-md-color-scheme="default"] .md-nav__link { color: var(--color-pewter); }
+[data-md-color-scheme="default"] .md-nav__link:hover,
+[data-md-color-scheme="default"] .md-nav__link--active { color: var(--color-slate); }
+
+.md-search__input {
+  background-color: rgba(181, 152, 90, 0.1);
+  color: var(--color-parchment);
+  font-family: var(--font-ui);
+  border: 1px solid rgba(181, 152, 90, 0.2);
+  transition: background-color var(--motion-duration) var(--motion-easing),
+              border-color var(--motion-duration) var(--motion-easing);
 }
 
-.md-nav__link:hover {
-  color: var(--navy) !important;
-  opacity: 0.8;
+.md-search__input:hover {
+  background-color: rgba(181, 152, 90, 0.15);
+  border-color: rgba(181, 152, 90, 0.3);
 }
 
-[data-md-color-scheme="sharang-dark"] .md-nav__link:hover {
-  color: var(--gold) !important;
-  opacity: 0.8;
+.md-search__input:focus {
+  background-color: rgba(181, 152, 90, 0.2);
+  border-color: var(--color-gold);
 }
 
-.md-nav__item--active > .md-nav__link {
-  color: var(--navy) !important;
-  font-weight: 600;
+.md-search__input::placeholder { color: rgba(247, 243, 236, 0.4); }
+
+[data-md-color-scheme="default"] .md-search__input {
+  background-color: #FFFFFF;
+  color: var(--color-slate);
+  border-color: rgba(61, 79, 99, 0.1);
 }
 
-[data-md-color-scheme="sharang-dark"] .md-nav__item--active > .md-nav__link {
-  color: var(--gold) !important;
-  font-weight: 600;
-}
+[data-md-color-scheme="default"] .md-search__input:hover { border-color: rgba(61, 79, 99, 0.2); }
+[data-md-color-scheme="default"] .md-search__input::placeholder { color: rgba(61, 79, 99, 0.4); }
 
-/* Section labels in nav — uppercase treatment */
-.md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
-.md-nav--primary > .md-nav__list > .md-nav__item > label .md-nav__link {
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  font-size: 0.68rem;
-  color: var(--warm-gray) !important;
-  padding-top: 0.8rem;
-}
-
-[data-md-color-scheme="sharang-dark"] .md-nav--primary > .md-nav__list > .md-nav__item > .md-nav__link,
-[data-md-color-scheme="sharang-dark"] .md-nav--primary > .md-nav__list > .md-nav__item > label .md-nav__link {
-  color: rgba(192, 154, 82, 0.45) !important;
-}
-
-/* ══════════════════════════════════════
-   SIDEBAR — Refined. Barely there.
-   ══════════════════════════════════════ */
+/* ============================================================================
+   7. Sidebar
+   ============================================================================ */
 
 .md-sidebar {
-  font-family: 'Inter', Arial, sans-serif;
+  background-color: var(--color-bg-primary);
+  border-right: 1px solid var(--color-border);
 }
 
-.md-sidebar--primary {
-  border-right: 1px solid var(--gray);
+[data-md-color-scheme="default"] .md-sidebar {
+  background-color: #FFFFFF;
+  border-right-color: rgba(61, 79, 99, 0.1);
 }
 
-[data-md-color-scheme="sharang-dark"] .md-sidebar--primary {
-  border-right-color: rgba(255, 255, 255, 0.04);
+.md-nav__section {
+  margin-bottom: var(--space-lg);
+  padding-bottom: var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
 }
 
-/* Table of contents sidebar — lighter */
-.md-sidebar--secondary {
-  opacity: 0.7;
-  transition: opacity 200ms ease;
-}
+/* ============================================================================
+   8. Links & Interactions
+   ============================================================================ */
 
-.md-sidebar--secondary:hover {
-  opacity: 1;
-}
-
-/* ══════════════════════════════════════
-   CONTENT AREA — The reading experience.
-   Tight column. Generous margins.
-   ══════════════════════════════════════ */
-
-.md-main {
-  background: var(--parchment);
-}
-
-[data-md-color-scheme="sharang-dark"] .md-main {
-  background: #0D1B2A;
-}
-
-.md-main__inner {
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.md-content {
-  padding-top: 2.5rem;
-  padding-bottom: 4rem;
-}
-
-/* ══════════════════════════════════════
-   LINKS — Understated. Gold on hover.
-   ══════════════════════════════════════ */
-
-.md-typeset a {
-  color: var(--navy);
+a {
+  color: var(--color-parchment);
   text-decoration: none;
-  border-bottom: 1px solid var(--navy-15);
-  transition: border-color 250ms ease, opacity 250ms ease;
+  border-bottom: 1px solid var(--color-gold);
+  transition: border-color var(--motion-duration) var(--motion-easing);
 }
 
-.md-typeset a:hover {
-  border-bottom-color: var(--gold);
-  opacity: 0.75;
-}
+a:hover { border-bottom-color: var(--color-gold); opacity: 0.9; }
+a:active { opacity: 0.8; }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset a {
-  color: var(--gold);
-  border-bottom-color: rgba(192, 154, 82, 0.2);
-}
+[data-md-color-scheme="default"] a { color: var(--color-slate); border-bottom-color: rgba(181, 152, 90, 0.4); }
+[data-md-color-scheme="default"] a:hover { border-bottom-color: var(--color-gold); }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset a:hover {
-  border-bottom-color: var(--gold-70);
-  opacity: 0.75;
-}
+.md-typeset .md-button,
+.md-typeset .md-tabs { text-decoration: none; }
 
-/* ══════════════════════════════════════
-   TABLES — Institutional. Clean.
-   ══════════════════════════════════════ */
+/* ============================================================================
+   9. Horizontal Rules & Dividers
+   ============================================================================ */
 
-.md-typeset table:not([class]) {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 0.78rem;
-  line-height: 1.55;
-  border-collapse: collapse;
-  width: 100%;
-  margin: 2rem 0;
-}
-
-.md-typeset table:not([class]) th {
-  background-color: var(--navy);
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 500;
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-  padding: 0.7rem 1rem;
-  text-align: left;
+hr {
   border: none;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--color-gold) 20%, var(--color-gold) 80%, transparent);
+  margin: var(--space-2xl) 0;
+  opacity: 0.8;
 }
 
-.md-typeset table:not([class]) td {
-  padding: 0.6rem 1rem;
-  border-bottom: 1px solid var(--gray);
-  color: var(--body);
-  vertical-align: top;
+.gold-rule {
+  display: block;
+  width: 48px;
+  height: 2px;
+  background-color: var(--color-gold);
+  margin: var(--space-xl) 0;
+  opacity: 0.9;
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset table:not([class]) td {
-  border-bottom-color: rgba(255, 255, 255, 0.05);
-  color: #B0ADA8;
+/* ============================================================================
+   10. Tables
+   ============================================================================ */
+
+.md-typeset table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--space-2xl) 0;
+  font-family: var(--font-body);
 }
 
-.md-typeset table:not([class]) tbody tr:nth-child(even) {
-  background-color: var(--off-white);
+.md-typeset thead {
+  background-color: var(--color-midnight);
+  color: #FFFFFF;
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset table:not([class]) tbody tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.02);
+[data-md-color-scheme="default"] .md-typeset thead {
+  background-color: var(--color-slate);
+  color: #FFFFFF;
 }
 
-.md-typeset table:not([class]) tbody tr {
-  transition: background-color 200ms ease;
+.md-typeset th {
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: left;
+  border: 1px solid rgba(181, 152, 90, 0.15);
+  color: #FFFFFF;
 }
 
-.md-typeset table:not([class]) tbody tr:hover {
-  background-color: var(--gold-08);
+[data-md-color-scheme="default"] .md-typeset th { border-color: rgba(61, 79, 99, 0.1); }
+
+.md-typeset td {
+  padding: var(--space-sm) var(--space-md);
+  border: 1px solid rgba(181, 152, 90, 0.15);
+  color: var(--color-parchment-dim);
+  font-size: 0.95rem;
+  line-height: 1.6;
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset table:not([class]) tbody tr:hover {
-  background-color: rgba(192, 154, 82, 0.04);
+[data-md-color-scheme="default"] .md-typeset td { border-color: rgba(61, 79, 99, 0.1); color: var(--color-slate); }
+
+.md-typeset tbody tr:nth-child(odd) { background-color: var(--color-deep); }
+[data-md-color-scheme="default"] .md-typeset tbody tr:nth-child(odd) { background-color: #F9F7F4; }
+.md-typeset tbody tr:nth-child(even) { background-color: transparent; }
+.md-typeset tbody tr:hover { background-color: rgba(181, 152, 90, 0.08); }
+[data-md-color-scheme="default"] .md-typeset tbody tr:hover { background-color: rgba(181, 152, 90, 0.05); }
+
+/* ============================================================================
+   11. Code Blocks & Inline Code
+   ============================================================================ */
+
+.md-typeset code {
+  background-color: var(--color-deep);
+  color: var(--color-parchment);
+  font-family: 'Courier New', monospace;
+  font-size: 0.9em;
+  padding: 2px 6px;
+  border-radius: 2px;
+  margin: 0 2px;
 }
 
-/* ══════════════════════════════════════
-   ADMONITIONS — Gold accent. Minimal.
-   ══════════════════════════════════════ */
+[data-md-color-scheme="default"] .md-typeset code {
+  background-color: #FFFFFF;
+  color: var(--color-slate);
+  border: 1px solid rgba(61, 79, 99, 0.1);
+}
+
+.md-typeset pre {
+  background-color: var(--color-deep);
+  color: var(--color-parchment);
+  padding: var(--space-md);
+  border-radius: 2px;
+  border: 1px solid rgba(181, 152, 90, 0.1);
+  overflow-x: auto;
+  margin: var(--space-lg) 0;
+}
+
+[data-md-color-scheme="default"] .md-typeset pre {
+  background-color: #FFFFFF;
+  color: var(--color-slate);
+  border-color: rgba(61, 79, 99, 0.1);
+}
+
+/* ============================================================================
+   12. Admonitions
+   ============================================================================ */
 
 .md-typeset .admonition,
 .md-typeset details {
+  background-color: var(--color-deep);
   border: none;
-  border-left: 2px solid var(--gold);
-  background-color: var(--gold-08);
+  border-left: 2px solid var(--color-gold);
   border-radius: 0;
   box-shadow: none;
-  font-size: 0.85rem;
-  padding: 1rem 1.4rem;
-  margin: 2rem 0;
+  margin: var(--space-lg) 0;
+  padding: var(--space-md) var(--space-lg);
+  font-size: 0.95rem;
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset .admonition,
-[data-md-color-scheme="sharang-dark"] .md-typeset details {
-  background-color: rgba(192, 154, 82, 0.04);
-  border-left-color: rgba(192, 154, 82, 0.4);
+[data-md-color-scheme="default"] .md-typeset .admonition,
+[data-md-color-scheme="default"] .md-typeset details {
+  background-color: var(--color-midnight-fade);
+  border-left-color: var(--color-gold);
 }
 
 .md-typeset .admonition-title,
 .md-typeset summary {
-  font-family: 'Inter', Arial, sans-serif;
+  font-family: var(--font-ui);
+  font-size: 0.68rem;
   font-weight: 500;
-  font-size: 0.78rem;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: var(--gold) !important;
+  color: var(--color-gold);
   background: none !important;
   border: none;
   padding-left: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: var(--space-xs);
 }
 
 .md-typeset .admonition-title::before,
 .md-typeset summary::before {
-  display: none !important;
+  display: none;
 }
 
-/* ══════════════════════════════════════
-   BLOCKQUOTES — Pull-quote feel.
-   ══════════════════════════════════════ */
+.md-typeset .admonition p,
+.md-typeset details p {
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
 
-.md-typeset blockquote {
-  border-left: 2px solid var(--gold-30);
-  padding: 0.8rem 1.6rem;
-  margin: 2rem 0;
-  color: var(--body-light);
+/* ============================================================================
+   13. Blockquotes
+   ============================================================================ */
+
+blockquote {
+  border-left: 2px solid var(--color-gold);
+  padding-left: var(--space-lg);
+  margin: var(--space-lg) 0;
+  color: var(--color-pewter);
   font-style: italic;
-  background: transparent;
+}
+
+blockquote p {
+  color: var(--color-pewter);
   font-size: 1.05rem;
   line-height: 1.75;
 }
 
-[data-md-color-scheme="sharang-dark"] .md-typeset blockquote {
-  border-left-color: rgba(192, 154, 82, 0.2);
-  color: #8A95A5;
-}
-
-/* ══════════════════════════════════════
-   CODE — Subtle. Functional.
-   ══════════════════════════════════════ */
-
-.md-typeset code {
-  font-family: 'Source Code Pro', 'Courier New', monospace;
-  font-size: 0.8rem;
-  background-color: var(--navy-04);
-  border: 1px solid var(--navy-08);
-  border-radius: 2px;
-  padding: 0.12em 0.4em;
-  color: var(--navy);
-}
-
-[data-md-color-scheme="sharang-dark"] .md-typeset code {
-  background-color: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.08);
-  color: #C5CDD8;
-}
-
-/* ══════════════════════════════════════
-   HORIZONTAL RULES — Barely visible.
-   ══════════════════════════════════════ */
-
-.md-typeset hr {
-  border: none;
-  border-top: 1px solid var(--gray);
-  margin: 3rem 0;
-  opacity: 0.6;
-}
-
-[data-md-color-scheme="sharang-dark"] .md-typeset hr {
-  border-top-color: rgba(255, 255, 255, 0.06);
-}
-
-/* ══════════════════════════════════════
-   LISTS — Generous spacing.
-   ══════════════════════════════════════ */
+/* ============================================================================
+   14. Lists
+   ============================================================================ */
 
 .md-typeset ul,
 .md-typeset ol {
-  margin-bottom: 1.3rem;
+  padding-left: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 .md-typeset li {
-  margin-bottom: 0.4rem;
+  margin-bottom: var(--space-xs);
+  line-height: 1.7;
+  color: var(--color-text-primary);
 }
 
-/* ══════════════════════════════════════
-   TAGS — Whisper-weight.
-   ══════════════════════════════════════ */
-
-.md-typeset .md-tag {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 0.65rem;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background-color: transparent;
-  color: var(--warm-gray);
-  border: 1px solid var(--gray);
-  border-radius: 1px;
-  padding: 0.2em 0.6em;
-  transition: border-color 200ms ease;
+.md-typeset li::marker {
+  color: var(--color-gold);
 }
 
-.md-typeset .md-tag:hover {
-  border-color: var(--gold-30);
-}
-
-[data-md-color-scheme="sharang-dark"] .md-typeset .md-tag {
-  color: #7A8899;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-/* ══════════════════════════════════════
-   FOOTER — Almost invisible. A quiet signature.
-   ══════════════════════════════════════ */
+/* ============================================================================
+   15. Footer
+   ============================================================================ */
 
 .md-footer {
-  background-color: var(--navy);
-  border-top: none;
+  background-color: var(--color-midnight);
+  border-top: 1px solid rgba(181, 152, 90, 0.08);
+}
+
+[data-md-color-scheme="default"] .md-footer {
+  background-color: #FFFFFF;
+  border-top-color: rgba(61, 79, 99, 0.1);
 }
 
 .md-footer-meta {
-  background-color: var(--navy);
+  background-color: var(--color-midnight);
 }
 
-.md-footer-nav {
-  font-family: 'Inter', Arial, sans-serif;
+[data-md-color-scheme="default"] .md-footer-meta {
+  background-color: #FFFFFF;
 }
 
-/* Previous/Next navigation */
-.md-footer__link {
-  opacity: 0.6;
-  transition: opacity 250ms ease;
-}
-
-.md-footer__link:hover {
-  opacity: 1;
-}
-
-/* ══════════════════════════════════════
-   CUSTOM COMPONENTS
-   ══════════════════════════════════════ */
-
-/* Domain cards on homepage */
-.domain-link {
-  display: block;
-  padding: 1.4rem 0;
-  border-bottom: 1px solid var(--gray);
-  transition: padding-left 250ms ease, border-color 250ms ease;
-  text-decoration: none !important;
-  border-left: none !important;
-}
-
-.domain-link:hover {
-  padding-left: 0.8rem;
-  border-bottom-color: var(--gold-30);
-}
-
-.domain-link:last-child {
+.md-footer a {
+  color: rgba(247, 243, 236, 0.18);
   border-bottom: none;
 }
 
-/* Section label — small caps, gold, earned */
-.section-label {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 0.68rem;
+[data-md-color-scheme="default"] .md-footer a {
+  color: rgba(61, 79, 99, 0.4);
+}
+
+/* ============================================================================
+   16. Images & Media
+   ============================================================================ */
+
+.md-typeset img {
+  border-radius: 2px;
+  margin: var(--space-lg) 0;
+}
+
+.md-typeset figure {
+  margin: var(--space-2xl) 0;
+}
+
+.md-typeset figcaption {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  color: var(--color-pewter);
+  margin-top: var(--space-xs);
+  text-align: center;
+}
+
+/* ============================================================================
+   17. Tabs (content tabs)
+   ============================================================================ */
+
+.md-typeset .tabbed-labels > label {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
   font-weight: 500;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 0.5rem;
-  display: block;
+  color: var(--color-pewter);
+  border-bottom: 2px solid transparent;
+  transition: color var(--motion-duration) var(--motion-easing),
+              border-color var(--motion-duration) var(--motion-easing);
 }
 
-[data-md-color-scheme="sharang-dark"] .section-label {
-  color: rgba(192, 154, 82, 0.5);
+.md-typeset .tabbed-labels > label:hover { color: var(--color-parchment); }
+
+.md-typeset .tabbed-labels > label.active {
+  color: var(--color-gold);
+  border-bottom-color: var(--color-gold);
 }
 
-/* Lede paragraph — editorial opening */
-.lede {
-  font-size: 1.15rem;
-  line-height: 1.7;
-  color: var(--navy-70);
-  margin-bottom: 2.5rem;
+/* ============================================================================
+   18. Theme Toggle Button
+   ============================================================================ */
+
+.md-header__button[for="__palette"] {
+  color: var(--color-parchment-muted);
+  transition: color var(--motion-duration) var(--motion-easing);
 }
 
-[data-md-color-scheme="sharang-dark"] .lede {
-  color: #8A95A5;
+.md-header__button[for="__palette"]:hover {
+  color: var(--color-gold);
 }
 
-/* Meta line — dates, classifications */
-.meta {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 0.72rem;
+[data-md-color-scheme="default"] .md-header__button[for="__palette"] {
+  color: var(--color-pewter);
+}
+
+[data-md-color-scheme="default"] .md-header__button[for="__palette"]:hover {
+  color: var(--color-slate);
+}
+
+/* ============================================================================
+   19. TOC (Table of Contents)
+   ============================================================================ */
+
+.md-sidebar--secondary .md-nav__link {
+  font-size: 0.78rem;
+  color: var(--color-pewter);
+}
+
+.md-sidebar--secondary .md-nav__link:hover { color: var(--color-parchment); }
+.md-sidebar--secondary .md-nav__link--active { color: var(--color-gold); }
+
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-nav__link { color: var(--color-pewter); }
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-nav__link:hover { color: var(--color-slate); }
+[data-md-color-scheme="default"] .md-sidebar--secondary .md-nav__link--active { color: var(--color-slate); font-weight: 500; }
+
+/* ============================================================================
+   20. Navigation Tabs (top-level)
+   ============================================================================ */
+
+.md-tabs {
+  background-color: var(--color-midnight);
+  border-bottom: 1px solid rgba(181, 152, 90, 0.08);
+}
+
+[data-md-color-scheme="default"] .md-tabs {
+  background-color: #FFFFFF;
+  border-bottom-color: rgba(61, 79, 99, 0.08);
+}
+
+.md-tabs__link {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
   font-weight: 400;
-  letter-spacing: 0.04em;
-  color: var(--warm-gray);
+  letter-spacing: 0.02em;
+  color: var(--color-parchment-muted);
+  opacity: 1;
+  transition: color var(--motion-duration) var(--motion-easing);
 }
 
-/* Gold divider — used sparingly */
-.gold-rule {
-  width: 48px;
-  height: 1.5px;
-  background: var(--gold);
-  border: none;
-  margin: 2rem 0;
-  opacity: 0.6;
-}
+.md-tabs__link:hover { color: var(--color-gold); }
+.md-tabs__link--active { color: var(--color-gold); font-weight: 500; }
 
-[data-md-color-scheme="sharang-dark"] .gold-rule {
-  opacity: 0.3;
-}
+[data-md-color-scheme="default"] .md-tabs__link { color: var(--color-pewter); }
+[data-md-color-scheme="default"] .md-tabs__link:hover { color: var(--color-slate); }
+[data-md-color-scheme="default"] .md-tabs__link--active { color: var(--color-slate); font-weight: 500; }
 
-/* ══════════════════════════════════════
-   SOURCE FILE META — Lighter
-   ══════════════════════════════════════ */
-
-.md-source-file {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 0.7rem;
-  color: var(--warm-gray);
-}
-
-/* ══════════════════════════════════════
-   PAGE ENTRANCE — Subtle fade. Taste dial 2.
-   ══════════════════════════════════════ */
-
-@media (prefers-reduced-motion: no-preference) {
-  .md-content {
-    animation: fadeIn 400ms ease-out;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(6px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-}
-
-/* ══════════════════════════════════════
-   REDUCED MOTION
-   ══════════════════════════════════════ */
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    transition-duration: 0.01ms !important;
-    animation-duration: 0.01ms !important;
-  }
-}
-
-/* ══════════════════════════════════════
-   PRINT — Clean, no chrome.
-   ══════════════════════════════════════ */
+/* ============================================================================
+   21. Print Styles
+   ============================================================================ */
 
 @media print {
-  .md-header, .md-footer, .md-sidebar {
-    display: none !important;
-  }
-  .md-typeset {
-    font-size: 10pt;
-    color: #1a1a1a;
-  }
-  .md-typeset h1 {
-    border-bottom-color: #B5985A;
-  }
-  .md-main {
-    background: white;
-  }
+  body { background: #FFFFFF; color: #333; }
+  .md-header, .md-footer, .md-sidebar { display: none; }
+  .md-content { max-width: 100%; padding: 0; }
+  a { color: #333; border-bottom: none; }
+  h1, h2, h3 { color: #333; }
 }
+
+/* ============================================================================
+   22. Utility Classes
+   ============================================================================ */
+
+.text-gold { color: var(--color-gold); }
+.text-parchment { color: var(--color-parchment); }
+.text-pewter { color: var(--color-pewter); }
+.text-slate { color: var(--color-slate); }
+
+.bg-midnight { background-color: var(--color-midnight); }
+.bg-deep { background-color: var(--color-deep); }
+
+.border-gold { border-color: var(--color-gold); }
+.border-subtle { border-color: var(--color-border); }
+
+.font-display { font-family: var(--font-display); }
+.font-ui { font-family: var(--font-ui); }
+
+.mt-0 { margin-top: 0; }
+.mb-0 { margin-bottom: 0; }
+.mt-sm { margin-top: var(--space-sm); }
+.mb-sm { margin-bottom: var(--space-sm); }
+.mt-md { margin-top: var(--space-md); }
+.mb-md { margin-bottom: var(--space-md); }
+.mt-lg { margin-top: var(--space-lg); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mt-xl { margin-top: var(--space-xl); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+/* ============================================================================
+   23. Grid Texture Overlay (optional decorative)
+   ============================================================================ */
+
+.grid-tex {
+  position: relative;
+}
+
+.grid-tex::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(181, 152, 90, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181, 152, 90, 0.03) 1px, transparent 1px);
+  background-size: var(--space-lg) var(--space-lg);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================================================
+   24. Page Reveal Animation
+   ============================================================================ */
+
+@keyframes pageReveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.md-content__inner {
+  animation: pageReveal 500ms cubic-bezier(0.25, 0.1, 0.25, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .md-content__inner { animation: none; }
+}
+
+/* ============================================================================
+   25. Hide Navigation on Pages with hide: navigation
+   ============================================================================ */
+
+.md-sidebar--primary:has(.md-nav--lifted) {
+  display: none;
+}
+
+/* ============================================================================
+   26. Domain Links (Homepage custom styling)
+   ============================================================================ */
+
+.md-typeset .domain-link {
+  display: block;
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-parchment-dim);
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  text-decoration: none;
+  transition: border-color var(--motion-duration) var(--motion-easing),
+              padding-left var(--motion-duration) var(--motion-easing);
+}
+
+.md-typeset .domain-link:hover {
+  border-bottom-color: var(--color-gold);
+  padding-left: 4px;
+}
+
+.md-typeset .domain-link strong {
+  color: var(--color-parchment);
+  font-weight: 700;
+}
+
+[data-md-color-scheme="default"] .md-typeset .domain-link {
+  color: var(--color-slate);
+  border-bottom-color: rgba(61, 79, 99, 0.1);
+}
+
+[data-md-color-scheme="default"] .md-typeset .domain-link:hover {
+  border-bottom-color: var(--color-gold);
+}
+
+[data-md-color-scheme="default"] .md-typeset .domain-link strong {
+  color: var(--color-slate);
+}
+
+/* ============================================================================
+   END OF BRAND SYSTEM
+   ============================================================================ */
