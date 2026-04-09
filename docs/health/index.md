@@ -1,12 +1,18 @@
 ---
 hide:
+  - navigation
   - toc
+title: Health
 ---
 
-# Health
+<h1 class="homepage-hidden-title">Health</h1>
+
+<p class="lede">Ayurveda, nutrition, fitness. Ancient wisdom meets modern evidence.</p>
 
 <div class="gold-rule"></div>
 
-<span class="section-label">Coming Soon</span>
-
-This section is being compiled.
+<div class="domain-grid">
+<a href="#" class="domain-card domain-card-coming-soon">
+<span class="domain-card-title">Coming Soon</span>
+</a>
+</div>
