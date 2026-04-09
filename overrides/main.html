@@ -1,18 +1,16 @@
 {% extends "base.html" %}
 
 {% block extrahead %}
-  <!-- Privacy: prevent search engine indexing -->
   <meta name="robots" content="noindex, nofollow, noarchive">
   <meta name="googlebot" content="noindex, nofollow">
-  <!-- Favicon -->
   <link rel="icon" href="{{ base_url }}/assets/favicon.png" type="image/png">
 {% endblock %}
 
 {% block footer %}
-  <footer class="md-footer" style="background:#0A2240;">
-    <div style="max-width:760px; margin:0 auto; padding:2rem 1.5rem; display:flex; justify-content:space-between; align-items:center;">
-      <span style="font-family:'Inter',sans-serif; font-size:0.65rem; font-weight:400; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.2);">Sharang’s Wiki</span>
-      <span style="font-family:'Inter',sans-serif; font-size:0.65rem; font-weight:300; color:rgba(255,255,255,0.15);">Unlisted. Not indexed.</span>
+  <footer class="md-footer" style="background:var(--md-primary-fg-color, #0D1F35);">
+    <div style="max-width:720px; margin:0 auto; padding:2rem 1.5rem; display:flex; justify-content:space-between; align-items:center;">
+      <span style="font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:400; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.18);">Sharang's Wiki</span>
+      <span style="font-family:'Inter',sans-serif; font-size:0.6rem; font-weight:300; color:rgba(255,255,255,0.12);">Unlisted. Not indexed.</span>
     </div>
   </footer>
 {% endblock %}
