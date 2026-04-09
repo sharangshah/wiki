@@ -875,3 +875,119 @@ blockquote p {
 /* ============================================================================
    END OF BRAND SYSTEM
    ============================================================================ */
+
+
+/* ============================================================
+   GRID TEXTURE OVERLAY (Vigilis-style)
+   ============================================================ */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(181,152,90,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181,152,90,.04) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.35;
+}
+
+/* ============================================================
+   HIDE BROKEN LOGO IN HEADER
+   ============================================================ */
+.md-header__button.md-logo,
+.md-nav__button.md-logo {
+  display: none !important;
+}
+
+/* ============================================================
+   DOMAIN GRID — Homepage card layout
+   ============================================================ */
+.domain-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin: 56px 0 72px;
+  max-width: 720px;
+}
+
+.domain-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 180px;
+  border: 1px solid rgba(181,152,90,.2);
+  border-radius: 2px;
+  background: rgba(181,152,90,.03);
+  text-decoration: none !important;
+  transition: border-color 200ms ease, background 200ms ease, transform 200ms ease;
+  position: relative;
+}
+
+.domain-card:hover {
+  border-color: rgba(181,152,90,.45);
+  background: rgba(181,152,90,.07);
+  transform: translateY(-2px);
+}
+
+.domain-card-title {
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #F7F3EC;
+  letter-spacing: 0.03em;
+}
+
+[data-md-color-scheme="default"] .domain-card-title {
+  color: #0D1F35;
+}
+
+[data-md-color-scheme="default"] .domain-card {
+  border-color: rgba(13,31,53,.15);
+  background: rgba(13,31,53,.03);
+}
+
+[data-md-color-scheme="default"] .domain-card:hover {
+  border-color: rgba(181,152,90,.4);
+  background: rgba(181,152,90,.06);
+}
+
+/* ============================================================
+   WIKI FOOTNOTE — Access notice
+   ============================================================ */
+.wiki-footnote {
+  margin-top: 80px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(181,152,90,.12);
+  font-size: 0.72rem;
+  color: rgba(247,243,236,.2);
+  font-style: italic;
+  letter-spacing: 0.01em;
+  max-width: 720px;
+}
+
+[data-md-color-scheme="default"] .wiki-footnote {
+  color: rgba(13,31,53,.25);
+  border-top-color: rgba(13,31,53,.08);
+}
+
+/* ============================================================
+   MOBILE RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .domain-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 40px 0 56px;
+  }
+  .domain-card {
+    min-height: 120px;
+  }
+  .domain-card-title {
+    font-size: 1.25rem;
+  }
+  .lede {
+    font-size: 1rem !important;
+  }
+}
