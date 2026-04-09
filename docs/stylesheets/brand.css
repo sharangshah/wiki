@@ -887,10 +887,10 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(rgba(181,152,90,.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(181,152,90,.08) 1px, transparent 1px);
+    linear-gradient(rgba(181,152,90,.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181,152,90,.15) 1px, transparent 1px);
   background-size: 22px 22px;
-  opacity: 0.6;
+  opacity: 1;
 }
 
 /* ============================================================
