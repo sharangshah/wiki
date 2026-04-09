@@ -991,3 +991,26 @@ body::before {
     font-size: 1rem !important;
   }
 }
+
+
+/* ============================================================
+   FIX: MkDocs wraps grid children in <p> — make it transparent
+   ============================================================ */
+.domain-grid > p {
+  display: contents;
+}
+
+/* ============================================================
+   HOMEPAGE: Hide the auto-generated H1 (sr-only keeps a11y)
+   ============================================================ */
+.homepage-hidden-title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
