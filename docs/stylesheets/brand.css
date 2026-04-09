@@ -735,7 +735,7 @@ blockquote p {
   font-weight: 400;
   letter-spacing: 0.02em;
   color: var(--color-parchment-muted);
-  opacity: 1;
+  opacity: 0.8;
   transition: color var(--motion-duration) var(--motion-easing);
 }
 
@@ -887,8 +887,8 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(rgba(181,152,90,.15) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(181,152,90,.15) 1px, transparent 1px);
+    linear-gradient(rgba(181,152,90,.10) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181,152,90,.10) 1px, transparent 1px);
   background-size: 22px 22px;
   opacity: 1;
 }
@@ -1017,31 +1017,67 @@ body::before {
 
 
 /* ==========================================================================
-   HEADER — Center site title
+   HEADER — Center site title (absolute position for true centering)
    ========================================================================== */
-.md-header__inner {
-  justify-content: center;
-}
-.md-header__title {
-  margin-left: auto;
-  margin-right: auto;
-}
-.md-header__topic {
-  text-align: center;
-}
-/* Push search icon to right edge while keeping title centered */
 .md-header__inner {
   position: relative;
 }
-.md-search {
+.md-header__title {
   position: absolute;
-  right: 0.4rem;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  white-space: nowrap;
 }
-/* Hide the hamburger/nav toggle on desktop to allow true centering */
+/* Search stays at right edge */
+.md-search {
+  margin-left: auto;
+}
+/* Hide the hamburger on desktop */
 @media (min-width: 76.25em) {
-  .md-header__button[for="__drawer"] {
-    display: none;
+  label[for="__drawer"] {
+    display: none !important;
   }
+}
+
+/* ==========================================================================
+   NAV SIDEBAR — Hide duplicate "Sharang's Wiki" site title in nav
+   ========================================================================== */
+.md-nav--primary > .md-nav__title {
+  display: none;
+}
+.md-sidebar--primary .md-nav--primary > .md-nav__title[for="__drawer"] {
+  display: none;
+}
+
+/* ==========================================================================
+   SUBPAGE — Coming soon card style
+   ========================================================================== */
+.domain-card-coming-soon {
+  opacity: 0.4;
+  pointer-events: none;
+  cursor: default;
+}
+.domain-card-coming-soon .domain-card-title {
+  font-style: italic;
+  font-size: 1.15rem;
+}
+
+/* ==========================================================================
+   REPORTS TABLE — Enhanced styling
+   ========================================================================== */
+.reports-table-wrapper table {
+  width: 100%;
+  max-width: 720px;
+}
+.reports-table-wrapper th,
+.reports-table-wrapper td {
+  white-space: nowrap;
+}
+.reports-table-wrapper td:nth-child(n+4) {
+  text-align: right;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-variant-numeric: tabular-nums;
 }
 
 /* ==========================================================================
