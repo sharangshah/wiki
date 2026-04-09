@@ -1,4 +1,4 @@
-/* ============================================================================
+h/* ============================================================================
    SHARANG’S WIKI — BRAND SYSTEM
    Dark-first, luxury editorial design system inspired by Vigilis
    ============================================================================ */
@@ -887,10 +887,10 @@ body::before {
   pointer-events: none;
   z-index: 0;
   background-image:
-    linear-gradient(rgba(181,152,90,.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(181,152,90,.04) 1px, transparent 1px);
+    linear-gradient(rgba(181,152,90,.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(181,152,90,.08) 1px, transparent 1px);
   background-size: 22px 22px;
-  opacity: 0.35;
+  opacity: 0.6;
 }
 
 /* ============================================================
@@ -1013,4 +1013,132 @@ body::before {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+
+/* ==========================================================================
+   HEADER — Center site title
+   ========================================================================== */
+.md-header__inner {
+  justify-content: center;
+}
+.md-header__title {
+  margin-left: auto;
+  margin-right: auto;
+}
+.md-header__topic {
+  text-align: center;
+}
+/* Push search icon to right edge while keeping title centered */
+.md-header__inner {
+  position: relative;
+}
+.md-search {
+  position: absolute;
+  right: 0.4rem;
+}
+/* Hide the hamburger/nav toggle on desktop to allow true centering */
+@media (min-width: 76.25em) {
+  .md-header__button[for="__drawer"] {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   SEARCH — Dark theme overlay matching Midnight/Parchment/Gold palette
+   ========================================================================== */
+/* Search bar input */
+.md-search__input {
+  background-color: rgba(13, 31, 53, 0.95) !important;
+  color: #F7F3EC !important;
+  border: 1px solid rgba(181, 152, 90, 0.25) !important;
+  border-radius: 2px !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+}
+.md-search__input::placeholder {
+  color: rgba(247, 243, 236, 0.35) !important;
+}
+.md-search__input:focus,
+.md-search__input:hover {
+  border-color: rgba(181, 152, 90, 0.45) !important;
+}
+
+/* Search overlay/modal background */
+.md-search__overlay {
+  background-color: rgba(10, 20, 40, 0.85) !important;
+}
+
+/* Search output/results panel */
+.md-search__output {
+  background-color: #0D1F35 !important;
+  border: 1px solid rgba(181, 152, 90, 0.2) !important;
+  border-top: none !important;
+  border-radius: 0 0 2px 2px !important;
+}
+
+/* Search result list */
+.md-search-result__list {
+  background-color: #0D1F35 !important;
+}
+
+/* Individual search result items */
+.md-search-result__item {
+  border-bottom: 1px solid rgba(181, 152, 90, 0.08) !important;
+}
+
+/* Search result links */
+.md-search-result__link {
+  background-color: transparent !important;
+  transition: background-color 200ms ease !important;
+}
+.md-search-result__link:hover {
+  background-color: rgba(181, 152, 90, 0.06) !important;
+}
+
+/* Search result article title */
+.md-search-result__article--document .md-search-result__title {
+  color: #B5985A !important;
+  font-family: 'Libre Baskerville', Georgia, serif !important;
+}
+
+/* Search result section title */
+.md-search-result__title {
+  color: #F7F3EC !important;
+}
+
+/* Search result teaser text */
+.md-search-result__teaser {
+  color: rgba(247, 243, 236, 0.55) !important;
+}
+
+/* Search meta info */
+.md-search-result__meta {
+  background-color: rgba(13, 31, 53, 0.8) !important;
+  color: rgba(247, 243, 236, 0.4) !important;
+  border-bottom: 1px solid rgba(181, 152, 90, 0.12) !important;
+}
+
+/* Search icon color */
+.md-search__icon {
+  color: rgba(247, 243, 236, 0.6) !important;
+}
+.md-search__icon:hover {
+  color: #B5985A !important;
+}
+
+/* Search scrollbar */
+.md-search__scrollwrap {
+  background-color: #0D1F35 !important;
+}
+.md-search__scrollwrap::-webkit-scrollbar-thumb {
+  background-color: rgba(181, 152, 90, 0.2) !important;
+}
+.md-search__scrollwrap::-webkit-scrollbar-track {
+  background-color: rgba(13, 31, 53, 0.5) !important;
+}
+
+/* Search highlight matches */
+.md-search-result mark {
+  color: #B5985A !important;
+  background-color: rgba(181, 152, 90, 0.12) !important;
 }
