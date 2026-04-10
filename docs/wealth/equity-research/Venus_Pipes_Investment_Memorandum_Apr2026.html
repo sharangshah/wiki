@@ -179,7 +179,6 @@ th {
     font-size: 0.8rem;
     letter-spacing: 0.3px;
     border-right: 1px solid rgba(255,255,255,0.08);
-    white-space: nowrap;
 }
 th:last-child { border-right: none; }
 td {
@@ -187,13 +186,15 @@ td {
     border-bottom: 1px solid var(--gray);
     vertical-align: top;
     line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }
 tbody tr:nth-child(even) { background: var(--off-white); }
 tbody tr:hover { background: #EDE9E3; transition: background 150ms ease-in-out; }
 tbody tr:last-child { border-bottom: 2px solid var(--navy); }
 
-/* Numeric cells: right-align */
-td:nth-child(n+2) { text-align: right; }
+/* Numeric cells: right-align (skip column 2 which may be descriptive text) */
+td:nth-child(n+3) { text-align: right; }
 
 /* ── TABLE SCROLL WRAPPER (mobile horizontal scroll) ── */
 .table-scroll {
@@ -369,17 +370,15 @@ td:nth-child(n+2) { text-align: right; }
     .toc > ol > li { font-size: 0.88rem; }
     .toc ul li { font-size: 0.78rem; }
 
-    /* Tables — horizontal scroll wrapper */
+    /* Tables — horizontal scroll via .table-scroll wrapper */
     table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-        white-space: nowrap;
         font-size: 0.8rem;
+        table-layout: auto;
     }
-    thead, tbody, tr, th, td { white-space: nowrap; }
-    th { padding: 8px 10px; font-size: 0.75rem; }
-    td { padding: 6px 10px; }
+    th { padding: 8px 10px; font-size: 0.75rem; white-space: normal; }
+    td { padding: 6px 10px; white-space: normal; word-wrap: break-word; overflow-wrap: break-word; }
+    .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .table-scroll table { min-width: 600px; }
 
     .exhibit-block {
         padding: var(--space-md) var(--space-lg);
@@ -424,14 +423,15 @@ td:nth-child(n+2) { text-align: right; }
     p { margin: 8px 0; }
 
     .toc {
-        padding: var(--space-md);
+        padding: var(--space-sm) var(--space-md);
         margin: var(--space-md) 0;
     }
-    .toc h3 { font-size: 0.95rem; margin-bottom: var(--space-sm); }
-    .toc > ol { padding-left: 18px; }
-    .toc > ol > li { font-size: 0.84rem; margin: 8px 0 3px; }
-    .toc ul { margin-left: 16px; }
-    .toc ul li { font-size: 0.74rem; margin: 2px 0; }
+    .toc h3 { font-size: 0.92rem; margin-bottom: var(--space-xs); }
+    .toc > ol { padding-left: 14px; }
+    .toc > ol > li { font-size: 0.8rem; margin: 6px 0 2px; }
+    .toc ul { margin: 2px 0 4px 10px; }
+    .toc ul li { font-size: 0.68rem; margin: 1px 0; line-height: 1.35; }
+    .toc ul li::before { content: "– "; }
 
     /* Tables — tighter on small screens */
     table { font-size: 0.75rem; margin: var(--space-md) 0; }
@@ -483,6 +483,10 @@ td:nth-child(n+2) { text-align: right; }
     .cover h1 { font-size: 1.35rem; }
     .cover .subtitle { font-size: 0.92rem; }
     h2 { font-size: 1rem; }
+    .toc > ol { padding-left: 10px; }
+    .toc > ol > li { font-size: 0.75rem; }
+    .toc ul { margin-left: 8px; }
+    .toc ul li { font-size: 0.64rem; line-height: 1.3; }
     table { font-size: 0.7rem; }
     th { padding: 5px 6px; font-size: 0.65rem; }
     td { padding: 4px 6px; font-size: 0.68rem; }
@@ -648,6 +652,14 @@ td:nth-child(n+2) { text-align: right; }
                     <li><a href="#exhibit-ca4-trend-verdict-return-momentum">CA.4: Trend Verdict</a></li>
                 </ul>
             </li>
+            <li><a href="#sec-industry-kpis">Industry-Specific KPI Dashboard</a>
+                <ul>
+                    <li><a href="#industry-specific-kpi-dashboard-stainless-steel-pipes-tubes">Key Metrics Decoded (RASK/CASK Equivalent)</a></li>
+                    <li><a href="#venus-pipes-industry-kpi-dashboard-fy22fy28e">Venus KPI Time-Series (FY22–FY28E)</a></li>
+                    <li><a href="#peer-benchmarking-industry-kpis-fy25-or-latest-available">Peer Benchmarks: Per-Tonne Economics</a></li>
+                    <li><a href="#reading-the-peer-benchmark-what-the-numbers-tell-us">Peer Benchmark Interpretation</a></li>
+                </ul>
+            </li>
             <li><a href="#sec-peers">Competitive & Peer Analysis</a></li>
             <li><a href="#sec-risk">Risk, Moat & Scenario Analysis</a>
                 <ul>
@@ -657,6 +669,14 @@ td:nth-child(n+2) { text-align: right; }
             </li>
             <li><a href="#sec-gov">Governance & Operations Exhibits</a></li>
             <li><a href="#sec-9">Valuation & Investment Conclusion</a></li>
+            <li><a href="#sec-risk-register">Consolidated Risk Register</a>
+                <ul>
+                    <li><a href="#master-risk-register">Master Risk Register (14 Risks)</a></li>
+                    <li><a href="#risk-heat-map-summary">Risk Heat Map Summary</a></li>
+                    <li><a href="#dual-risk-simultaneous-scenario-q114-mandatory">Dual-Risk Scenario (ADD Expiry + Nickel Spike)</a></li>
+                    <li><a href="#bear-case-stress-test-q115q117">Bear Case Stress Test & Kill Switch</a></li>
+                </ul>
+            </li>
         </ol>
     </div>
 
@@ -5152,6 +5172,387 @@ td:nth-child(n+2) { text-align: right; }
 <p><em>Exhibits compiled: April 8, 2026</em><br />
 <em>Format: Ready for integration into investor presentation and management discussion</em><br />
 <em>Next review: Post-FY26 results for Phase 1/2 capacity ramp validation</em></p>
+        </div>
+        <a href="#toc" class="back-to-toc">↑ Back to Contents</a>
+    </div>
+    <div class="page-break"></div>
+
+    <!-- ═══ INDUSTRY-SPECIFIC KPI DASHBOARD ═══ -->
+    <div class="section" id="sec-industry-kpis">
+        <div class="exhibit-block">
+            <h3>Industry-Specific KPI Dashboard — The Unit Economics of SS Pipes</h3>
+            <h2 id="industry-specific-kpi-dashboard-stainless-steel-pipes-tubes">Industry-Specific KPI Dashboard — Stainless Steel Pipes &amp; Tubes</h2>
+<p>Understanding stainless steel pipe businesses requires tracking metrics distinct from generic manufacturing. Just as airlines are measured by RASK, CASK, and load factors, and banks by NIM and CASA ratios, SS pipe companies have their own set of industry-specific KPIs that drive value creation. The metrics below are the equivalent "unit economics language" for this industry.</p>
+<h3 id="what-matters-in-ss-pipes-the-key-metrics-decoded">What Matters in SS Pipes — The Key Metrics Decoded</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Why It Matters</th>
+<th>What Good Looks Like</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Realization per Tonne (₹ Lakh/MT)</strong></td>
+<td>Proxy for product mix quality — higher realization = more specialty/seamless grades</td>
+<td>&gt;₹3.5 Lakh/MT indicates strong specialty mix</td>
+</tr>
+<tr>
+<td><strong>EBITDA per Tonne (₹ Lakh/MT)</strong></td>
+<td>True pricing power — strips out volume effects and shows value capture per unit</td>
+<td>&gt;₹0.50 Lakh/MT is strong; &gt;₹0.70 is exceptional</td>
+</tr>
+<tr>
+<td><strong>Capacity Utilization (%)</strong></td>
+<td>Operating leverage trigger — fixed costs are high in pipe manufacturing</td>
+<td>&gt;80% signals operating leverage kicking in</td>
+</tr>
+<tr>
+<td><strong>Value-Added Mix (%)</strong></td>
+<td>Share of revenue from specialty grades (seamless, duplex, super-duplex, 2507)</td>
+<td>&gt;40% indicates defensible margin structure</td>
+</tr>
+<tr>
+<td><strong>Export Share (%)</strong></td>
+<td>Geographic diversification + currency hedge + quality signal (export specs are stricter)</td>
+<td>&gt;25% is meaningful diversification</td>
+</tr>
+<tr>
+<td><strong>Order Book Coverage (Months)</strong></td>
+<td>Demand visibility — critical in a cyclical industry</td>
+<td>&gt;3 months provides earnings confidence</td>
+</tr>
+<tr>
+<td><strong>Working Capital Days</strong></td>
+<td>Cash conversion efficiency — SS pipes are working-capital intensive due to nickel/steel costs</td>
+<td>&lt;90 days is efficient for this industry</td>
+</tr>
+<tr>
+<td><strong>Inventory Turnover (x)</strong></td>
+<td>Speed of inventory conversion — high nickel prices make slow inventory dangerous</td>
+<td>&gt;4x is healthy; &lt;3x needs investigation</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="venus-pipes-industry-kpi-dashboard-fy22fy28e">Venus Pipes — Industry KPI Dashboard (FY22–FY28E)</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>FY22</th>
+<th>FY23</th>
+<th>FY24</th>
+<th>FY25</th>
+<th>FY26E</th>
+<th>FY27E</th>
+<th>FY28E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Revenue (₹ Cr)</td>
+<td>309.3</td>
+<td>552.4</td>
+<td>802.2</td>
+<td>958.5</td>
+<td>1,150</td>
+<td>1,345</td>
+<td>1,545</td>
+</tr>
+<tr>
+<td>Installed Capacity (MTPA)</td>
+<td>28,000</td>
+<td>30,000</td>
+<td>34,800</td>
+<td>38,400</td>
+<td>43,200</td>
+<td>46,800</td>
+<td>51,000</td>
+</tr>
+<tr>
+<td><strong>Capacity Utilization (%)</strong></td>
+<td>65%</td>
+<td>72%</td>
+<td>82%</td>
+<td>88%</td>
+<td>70%</td>
+<td>80%</td>
+<td>85%</td>
+</tr>
+<tr>
+<td>Implied Volume (MT)</td>
+<td>18,200</td>
+<td>21,600</td>
+<td>28,536</td>
+<td>33,792</td>
+<td>30,240</td>
+<td>37,440</td>
+<td>43,350</td>
+</tr>
+<tr>
+<td><strong>Realization per Tonne (₹ Lakh/MT)</strong></td>
+<td>1.70</td>
+<td>2.56</td>
+<td>2.81</td>
+<td>2.84</td>
+<td>3.80</td>
+<td>3.59</td>
+<td>3.56</td>
+</tr>
+<tr>
+<td><strong>EBITDA per Tonne (₹ Lakh/MT)</strong></td>
+<td>0.21</td>
+<td>0.32</td>
+<td>0.51</td>
+<td>0.50</td>
+<td>0.68</td>
+<td>0.65</td>
+<td>0.65</td>
+</tr>
+<tr>
+<td>EBITDA Margin (%)</td>
+<td>12.3%</td>
+<td>12.5%</td>
+<td>18.2%</td>
+<td>17.5%</td>
+<td>17.8%</td>
+<td>18.2%</td>
+<td>18.2%</td>
+</tr>
+<tr>
+<td><strong>Value-Added Mix (%)</strong> <span class="tag-estimated">ESTIMATED</span></td>
+<td>18%</td>
+<td>22%</td>
+<td>30%</td>
+<td>35%</td>
+<td>40%</td>
+<td>43%</td>
+<td>45%</td>
+</tr>
+<tr>
+<td><strong>Export Share of Revenue (%)</strong></td>
+<td>15%</td>
+<td>18%</td>
+<td>22%</td>
+<td>25%</td>
+<td>28%</td>
+<td>30%</td>
+<td>32%</td>
+</tr>
+<tr>
+<td><strong>Order Book Coverage (Months)</strong> <span class="tag-estimated">ESTIMATED</span></td>
+<td>2.0</td>
+<td>2.5</td>
+<td>3.5</td>
+<td>4.0</td>
+<td>3.5</td>
+<td>4.0</td>
+<td>4.0</td>
+</tr>
+<tr>
+<td><strong>Working Capital Days</strong></td>
+<td>110</td>
+<td>105</td>
+<td>98</td>
+<td>95</td>
+<td>92</td>
+<td>88</td>
+<td>85</td>
+</tr>
+<tr>
+<td>Inventory Turnover (x)</td>
+<td>3.2</td>
+<td>3.5</td>
+<td>4.1</td>
+<td>4.3</td>
+<td>4.0</td>
+<td>4.5</td>
+<td>4.8</td>
+</tr>
+<tr>
+<td><strong>Net Debt/EBITDA (x)</strong></td>
+<td>1.8</td>
+<td>1.5</td>
+<td>0.8</td>
+<td>0.6</td>
+<td>1.2</td>
+<td>0.8</td>
+<td>0.5</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Key inflection points:</strong><br />
+- FY24 was the margin inflection — EBITDA/tonne jumped from ₹0.32 to ₹0.51 Lakh (60% increase), driven by seamless capacity coming online and value-added mix crossing 30%<br />
+- FY26E shows a utilization dip (70%) as Phase 2 capacity comes online — this is the classic J-curve in capacity expansion cycles<br />
+- Realization/tonne trending up from ₹1.70 to projected ₹3.80 in FY26E reflects the structural shift toward higher-margin seamless and specialty grades</p>
+<h3 id="peer-benchmarking-industry-kpis-fy25-or-latest-available">Peer Benchmarking — Industry KPIs (FY25 or Latest Available)</h3>
+<p>This is the critical "apples-to-apples" comparison. Standard P/E and EV/EBITDA tell you what the market thinks. Per-tonne metrics tell you who is actually running a better business.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>KPI</th>
+<th>Venus Pipes</th>
+<th>Ratnamani Metals</th>
+<th>Jindal SAW</th>
+<th>APL Apollo</th>
+<th>Industry Median</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Revenue (₹ Cr)</strong></td>
+<td>958.5</td>
+<td>4,800</td>
+<td>18,500</td>
+<td>18,000</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Installed Capacity (MTPA)</strong></td>
+<td>38,400</td>
+<td>120,000</td>
+<td>500,000</td>
+<td>2,800,000</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>Capacity Utilization (%)</strong></td>
+<td>88%</td>
+<td>72%</td>
+<td>65%</td>
+<td>70%</td>
+<td>72%</td>
+</tr>
+<tr>
+<td><strong>Realization/Tonne (₹ Lakh/MT)</strong></td>
+<td>2.84</td>
+<td>2.20</td>
+<td>1.85</td>
+<td>0.64</td>
+<td>1.85</td>
+</tr>
+<tr>
+<td><strong>EBITDA/Tonne (₹ Lakh/MT)</strong></td>
+<td>0.50</td>
+<td>0.42</td>
+<td>0.28</td>
+<td>0.07</td>
+<td>0.28</td>
+</tr>
+<tr>
+<td><strong>EBITDA Margin (%)</strong></td>
+<td>17.5%</td>
+<td>19.0%</td>
+<td>15.2%</td>
+<td>10.5%</td>
+<td>15.2%</td>
+</tr>
+<tr>
+<td><strong>Value-Added Mix (%)</strong> <span class="tag-estimated">ESTIMATED</span></td>
+<td>35%</td>
+<td>45%</td>
+<td>20%</td>
+<td>5%</td>
+<td>22%</td>
+</tr>
+<tr>
+<td><strong>Export Share (%)</strong></td>
+<td>25%</td>
+<td>15%</td>
+<td>30%</td>
+<td>5%</td>
+<td>18%</td>
+</tr>
+<tr>
+<td><strong>Order Book (Months)</strong> <span class="tag-estimated">ESTIMATED</span></td>
+<td>4.0</td>
+<td>5.0</td>
+<td>6.0</td>
+<td>2.0</td>
+<td>4.0</td>
+</tr>
+<tr>
+<td><strong>Working Capital Days</strong></td>
+<td>95</td>
+<td>85</td>
+<td>120</td>
+<td>45</td>
+<td>90</td>
+</tr>
+<tr>
+<td><strong>Inventory Turnover (x)</strong></td>
+<td>4.3</td>
+<td>4.8</td>
+<td>3.2</td>
+<td>8.5</td>
+<td>4.3</td>
+</tr>
+<tr>
+<td><strong>D/E Ratio</strong></td>
+<td>0.25</td>
+<td>0.08</td>
+<td>0.85</td>
+<td>0.35</td>
+<td>0.35</td>
+</tr>
+<tr>
+<td><strong>ROE (%)</strong></td>
+<td>19.8%</td>
+<td>18.5%</td>
+<td>16.0%</td>
+<td>28.0%</td>
+<td>18.5%</td>
+</tr>
+<tr>
+<td><strong>ROCE (%)</strong></td>
+<td>21.0%</td>
+<td>22.0%</td>
+<td>14.0%</td>
+<td>32.0%</td>
+<td>21.0%</td>
+</tr>
+<tr>
+<td><strong>3Y Revenue CAGR (%)</strong></td>
+<td>45.7%</td>
+<td>12.0%</td>
+<td>18.0%</td>
+<td>22.0%</td>
+<td>18.0%</td>
+</tr>
+<tr>
+<td><strong>P/E (FY25)</strong></td>
+<td>57x</td>
+<td>42x</td>
+<td>28x</td>
+<td>55x</td>
+<td>42x</td>
+</tr>
+<tr>
+<td><strong>EV/EBITDA (FY25)</strong></td>
+<td>35x</td>
+<td>28x</td>
+<td>16x</td>
+<td>40x</td>
+<td>28x</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="reading-the-peer-benchmark-what-the-numbers-tell-us">Reading the Peer Benchmark — What the Numbers Tell Us</h3>
+<p><strong>Venus vs. Ratnamani (closest peer):</strong><br />
+- Venus has higher realization/tonne (₹2.84 vs ₹2.20) — reflects higher seamless mix and export pricing<br />
+- But lower EBITDA margin (17.5% vs 19.0%) — Ratnamani has scale advantage and higher value-added mix (45% vs 35%)<br />
+- Venus growing 4x faster (45.7% vs 12.0% CAGR) — the growth premium is justified only if margin convergence happens<br />
+- Venus at 88% utilization vs Ratnamani at 72% — Venus needs new capacity more urgently, which is why Phase 2 capex is critical</p>
+<p><strong>Venus vs. APL Apollo (volume play comparison):</strong><br />
+- Realization gap is 4.4x (₹2.84 vs ₹0.64) — entirely different product spectrum. APL Apollo is mild steel commodity pipes; Venus is specialty SS<br />
+- EBITDA/tonne gap is 7.1x (₹0.50 vs ₹0.07) — confirms Venus operates in a fundamentally different margin band<br />
+- APL Apollo's higher ROE (28% vs 19.8%) is driven by volume and asset turns, not margin — different business model, not directly comparable</p>
+<p><strong>Venus vs. Jindal SAW (large-diameter comparison):</strong><br />
+- Jindal has 13x the capacity but lower utilization (65%) and lower realization (₹1.85) — different end-market focus (oil &amp; gas large-diameter)<br />
+- Venus's export share (25%) is below Jindal's (30%) but growing faster — export momentum is a key FY26–27 catalyst<br />
+- Jindal's higher working capital days (120 vs 95) reflects larger project-based contracts with longer receivable cycles</p>
+<p><strong>The key investment question from this data:</strong> Venus commands the highest realization/tonne in the peer set, suggesting genuine product differentiation. The question is whether EBITDA/tonne can expand toward Ratnamani levels (₹0.42→₹0.50+) as value-added mix crosses 40% — this is the core margin expansion thesis.</p>
         </div>
         <a href="#toc" class="back-to-toc">↑ Back to Contents</a>
     </div>
@@ -13912,6 +14313,297 @@ Reduce all terminal-period EBITDA margins by 150-180 bps; recompute DCF:<br />
 <p><em>End of Sections 9-11</em></p>
         <a href="#toc" class="back-to-toc">↑ Back to Contents</a>
     </div>
+
+    <!-- ═══ CONSOLIDATED RISK REGISTER ═══ -->
+    <div class="section" id="sec-risk-register">
+        <div class="exhibit-block" style="border-left-color: var(--coral);">
+            <h3 style="color: var(--coral);">Consolidated Risk Register — Monitoring Dashboard</h3>
+            <h2 id="consolidated-risk-register-venus-pipes-tubes">Consolidated Risk Register — Venus Pipes &amp; Tubes</h2>
+<p>This register aggregates all risks identified across the Investment Memorandum into a single monitoring dashboard. Each risk includes a monitoring trigger — the specific observable signal that would indicate the risk is materialising. Risks are ordered by combined severity × probability score.</p>
+<h3 id="master-risk-register">Master Risk Register</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Risk</th>
+<th>Category</th>
+<th>Severity</th>
+<th>Probability</th>
+<th>Annual EBITDA Impact (₹ Cr)</th>
+<th>Mitigation</th>
+<th>Monitoring Trigger</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>R1</td>
+<td><strong>ADD Expiry (Dec 2027)</strong> — Anti-dumping duty on Chinese SS imports expires; if not renewed, Chinese imports at 15–25% price discount flood domestic market</td>
+<td>Government / Policy</td>
+<td>Critical</td>
+<td>High</td>
+<td>–40 to –60</td>
+<td>Diversify to export (30%+ target); shift to grades not covered by ADD; build quality moat in seamless segment</td>
+<td>DGTR investigation status updates; quarterly import volume data from ISSDA; any lobbying activity for extension</td>
+<td>Active — monitoring DGTR proceedings</td>
+</tr>
+<tr>
+<td>R2</td>
+<td><strong>Phase 2 Capex Execution Risk</strong> — ₹250 Cr capex for 12,000 MTPA expansion; delays or cost overruns would defer operating leverage</td>
+<td>Execution / Operational</td>
+<td>Critical</td>
+<td>Medium</td>
+<td>–25 to –40 (deferred revenue)</td>
+<td>Phased commissioning; equipment orders already placed; brownfield site reduces execution risk</td>
+<td>Quarterly management commentary on commissioning timeline; capex spend vs. plan; monthly site progress</td>
+<td>Active — Phase 2 under construction</td>
+</tr>
+<tr>
+<td>R3</td>
+<td><strong>Nickel Price Volatility</strong> — Nickel at ₹1,300–1,900/kg; a 20% spike compresses margins by 200–300 bps if pass-through is delayed</td>
+<td>Commodity / Input Cost</td>
+<td>High</td>
+<td>High</td>
+<td>–15 to –25</td>
+<td>60–90 day pass-through clauses in contracts; inventory management (45–60 day cycle); hedging on export contracts</td>
+<td>LME nickel price crossing ₹2,000/kg; raw material cost as % of revenue exceeding 68%; inventory days rising above 70</td>
+<td>Active — nickel volatile</td>
+</tr>
+<tr>
+<td>R4</td>
+<td><strong>Customer Concentration</strong> — Top 10 customers contribute 45–50% of revenue; loss of a major customer disrupts volumes</td>
+<td>Commercial / Revenue</td>
+<td>High</td>
+<td>Medium</td>
+<td>–15 to –30</td>
+<td>Broaden customer base; export diversification; government/PSU order pipeline; product range expansion</td>
+<td>Top customer exceeding 12% of revenue; any single customer loss &gt;₹50 Cr; order book falling below 3 months</td>
+<td>Stable — diversifying</td>
+</tr>
+<tr>
+<td>R5</td>
+<td><strong>Competitive Pricing Pressure</strong> — Ratnamani, Jindal SAW, or new entrants initiating price wars in Venus's core seamless segment</td>
+<td>Competitive / Market</td>
+<td>High</td>
+<td>High</td>
+<td>–10 to –20</td>
+<td>Specialty grade differentiation (duplex, super-duplex); export market insulation; customer switching costs (approvals take 6–18 months)</td>
+<td>Peer pricing data showing &gt;5% decline in realization/tonne; new capacity announcements in seamless segment; loss of competitive bids on price alone</td>
+<td>Active — monitoring</td>
+</tr>
+<tr>
+<td>R6</td>
+<td><strong>Supplier Concentration</strong> — Dependence on 3–4 major SS coil/sheet suppliers; supply disruption or price gouging</td>
+<td>Supply Chain</td>
+<td>High</td>
+<td>Low</td>
+<td>–10 to –20</td>
+<td>Multiple sourcing relationships; import sourcing from Indonesia/Japan; strategic inventory buffer</td>
+<td>Supplier lead times exceeding 90 days; primary supplier financial distress signals; raw material rejection rate exceeding 3%</td>
+<td>Stable</td>
+</tr>
+<tr>
+<td>R7</td>
+<td><strong>Technology Substitution (Plastic/Composite Pipes)</strong> — HDPE, CPVC, GRP gaining share in low-pressure water and chemical applications, eroding demand for lower-grade SS</td>
+<td>Technology / Disruption</td>
+<td>High</td>
+<td>Medium</td>
+<td>–10 to –15 (long-term)</td>
+<td>Focus on high-temperature, high-pressure applications where SS is irreplaceable; move toward premium grades (super-duplex, 2507)</td>
+<td>Plastic pipe market share in water segment exceeding 40%; government specifications relaxing material requirements; any large project substituting SS with composites</td>
+<td>Watch — slow-moving risk</td>
+</tr>
+<tr>
+<td>R8</td>
+<td><strong>Macro/Demand Cyclicality</strong> — Capital expenditure cycles in oil &amp; gas, pharma, chemicals drive order flow; downturn reduces demand 20–30%</td>
+<td>Macro / Cyclical</td>
+<td>High</td>
+<td>Medium</td>
+<td>–15 to –25</td>
+<td>End-market diversification (pharma, food processing, water treatment, defence); export markets on different capex cycles</td>
+<td>India IIP (industrial production) growth falling below 3%; oil &amp; gas capex announcements declining; sectoral capex tracker turning negative</td>
+<td>Stable — current capex cycle supportive</td>
+</tr>
+<tr>
+<td>R9</td>
+<td><strong>Foreign Exchange Exposure</strong> — 25% export revenue creates INR/USD exposure; sudden INR appreciation compresses export margins</td>
+<td>Financial / FX</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>–5 to –10</td>
+<td>Natural hedge (import raw materials in USD); forward contracts on confirmed export orders; currency clauses in multi-year contracts</td>
+<td>INR appreciating below 80/USD; unhedged exposure exceeding 40% of export revenue; forward cover dropping below 60%</td>
+<td>Stable — currently hedged</td>
+</tr>
+<tr>
+<td>R10</td>
+<td><strong>Working Capital Strain</strong> — High nickel prices increase raw material funding; working capital days blowing out reduces free cash flow</td>
+<td>Financial / Liquidity</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>–5 to –10 (FCF impact)</td>
+<td>Tight inventory management (45-day cycle target); negotiated supplier credit terms; efficient receivable collection (PSU vs private mix)</td>
+<td>Working capital days exceeding 110; net debt/EBITDA exceeding 1.5x; cash conversion ratio falling below 60%</td>
+<td>Stable — WC days improving</td>
+</tr>
+<tr>
+<td>R11</td>
+<td><strong>Board Independence / Governance</strong> — Promoter-dominated board; 2 of 3 independent directors have limited pipe industry experience; RPT oversight</td>
+<td>Governance</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Reputational / multiple compression</td>
+<td>Independent director addition; RPT audit committee review; minority shareholder activism</td>
+<td>RPT value exceeding 5% of revenue; independent director resignations; auditor qualifications; promoter pledge ratio increasing</td>
+<td>Watch</td>
+</tr>
+<tr>
+<td>R12</td>
+<td><strong>Regulatory Compliance (BIS/Environmental)</strong> — Evolving BIS standards, environmental norms for manufacturing, and emission compliance could increase compliance costs</td>
+<td>Regulatory</td>
+<td>Medium</td>
+<td>Low</td>
+<td>–3 to –5</td>
+<td>Proactive compliance investment; ISO certifications; environmental clearances for Phase 2 already obtained</td>
+<td>New BIS mandatory certifications for product categories; environmental penalty notices; compliance cost as % of revenue exceeding 1.5%</td>
+<td>Stable</td>
+</tr>
+<tr>
+<td>R13</td>
+<td><strong>Key Man Risk</strong> — Founder-promoter driven company; thin middle management bench in a specialised manufacturing business</td>
+<td>Management</td>
+<td>Medium</td>
+<td>Low</td>
+<td>Unquantifiable — multiple compression risk</td>
+<td>Professional CEO track; functional heads with 10+ year tenure; succession planning</td>
+<td>Sudden departure of CMD or CFO; key functional head attrition exceeding 2 in a year; no succession plan disclosed</td>
+<td>Watch</td>
+</tr>
+<tr>
+<td>R14</td>
+<td><strong>PLI Benefit Clawback</strong> — PLI scheme has production and capex milestones; failure to meet targets results in incentive clawback</td>
+<td>Government / Policy</td>
+<td>Medium</td>
+<td>Low</td>
+<td>–5 to –8</td>
+<td>Conservative milestone targets; capacity build ahead of schedule; production ramp aligned with PLI timeline</td>
+<td>PLI milestone achievement reports; any government communication on scheme modifications; actual vs target production gap exceeding 15%</td>
+<td>Stable — on track</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="risk-heat-map-summary">Risk Heat Map Summary</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Low Probability</strong></th>
+<th><strong>Medium Probability</strong></th>
+<th><strong>High Probability</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Critical Impact</strong></td>
+<td>Regulatory Compliance (R12)</td>
+<td>Phase 2 Execution (R2), Technology Substitution (R7)</td>
+<td><strong>ADD Expiry (R1)</strong>, Competitive Pricing (R5)</td>
+</tr>
+<tr>
+<td><strong>High Impact</strong></td>
+<td>Supplier Concentration (R6)</td>
+<td>Customer Concentration (R4), Demand Cyclicality (R8)</td>
+<td>Nickel Volatility (R3)</td>
+</tr>
+<tr>
+<td><strong>Medium Impact</strong></td>
+<td>Board Governance (R11), Key Man (R13), PLI Clawback (R14)</td>
+<td>FX Exposure (R9), Working Capital (R10)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Single most under-acknowledged risk:</strong> Technology Substitution (R7). The market focuses on near-term ADD expiry and nickel volatility, but the slow erosion of lower-grade SS demand by advanced plastics/composites represents a structural 10–15 year threat that could redefine the addressable market. Venus's pivot toward premium seamless grades is the correct strategic response.</p>
+<h3 id="dual-risk-simultaneous-scenario-q114-mandatory">Dual-Risk Simultaneous Scenario (Q114 — Mandatory)</h3>
+<p><strong>Scenario: ADD Expiry + Nickel Price Spike co-occur in H2 FY28</strong></p>
+<ul>
+<li>ADD expires December 2027; simultaneously, nickel spikes 25% to ₹2,250/kg due to Indonesian export restrictions</li>
+<li>Chinese imports flood domestic market at 15–20% price discount, compressing domestic realizations by ₹0.40 Lakh/MT</li>
+<li>Nickel spike adds ₹0.35 Lakh/MT to input costs with 60–90 day pass-through lag</li>
+</ul>
+<div class="table-scroll"><table>
+<thead>
+<tr>
+<th>Impact Line</th>
+<th>Base Case FY28E</th>
+<th>Dual-Risk Scenario</th>
+<th>Delta</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Revenue (₹ Cr)</td>
+<td>1,545</td>
+<td>1,320</td>
+<td>–225 (–14.6%)</td>
+</tr>
+<tr>
+<td>Realization/MT (₹ Lakh)</td>
+<td>3.56</td>
+<td>3.05</td>
+<td>–0.51</td>
+</tr>
+<tr>
+<td>EBITDA Margin (%)</td>
+<td>18.2%</td>
+<td>12.0%</td>
+<td>–620 bps</td>
+</tr>
+<tr>
+<td>EBITDA (₹ Cr)</td>
+<td>281</td>
+<td>158</td>
+<td>–123 (–43.8%)</td>
+</tr>
+<tr>
+<td>Net Debt/EBITDA (x)</td>
+<td>0.5x</td>
+<td>1.1x</td>
+<td>+0.6x</td>
+</tr>
+<tr>
+<td>Interest Coverage (x)</td>
+<td>8.0x</td>
+<td>4.5x</td>
+<td>–3.5x</td>
+</tr>
+<tr>
+<td>FCF Positive?</td>
+<td>Yes (₹120 Cr)</td>
+<td>Marginally (₹15 Cr)</td>
+<td>Stressed but positive</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Solvency verdict:</strong> The business remains solvent (net debt/EBITDA 1.1x, well below 4x threshold) and FCF-positive even under the dual-risk scenario. However, the stock would face 30–40% downside from multiple compression as the market reprices from a growth story to a survival story. This scenario defines the bear case floor.</p>
+<h3 id="bear-case-stress-test-q115q117">Bear Case Stress Test (Q115–Q117)</h3>
+<p><strong>What would make us wrong on the investment thesis?</strong></p>
+<ol>
+<li>
+<p><strong>ADD not renewed AND domestic market share loss &gt;5%</strong> — If Chinese imports capture meaningful domestic share, Venus's volume growth thesis breaks. Price target drops to ₹650–750 range (40–45% downside from current ₹1,126).</p>
+</li>
+<li>
+<p><strong>Phase 2 capex delayed by 12+ months AND utilization drops below 65%</strong> — If new capacity doesn't come online on time and existing capacity underutilised, operating deleverage kicks in. EBITDA margins could revert to 12–13%.</p>
+</li>
+<li>
+<p><strong>Sustained nickel above ₹2,500/kg for 4+ quarters</strong> — At these levels, even with pass-through, working capital strain becomes severe and smaller customers defer orders. Working capital days could blow out to 130+.</p>
+</li>
+</ol>
+<p><strong>Kill switch:</strong> If any two of the three above materialise simultaneously, the investment thesis is impaired and the position should be exited regardless of price.</p>
+        </div>
+        <a href="#toc" class="back-to-toc">↑ Back to Contents</a>
+    </div>
+    <div class="page-break"></div>
 
     <!-- ═══ DISCLAIMER ═══ -->
     <div class="disclaimer">
