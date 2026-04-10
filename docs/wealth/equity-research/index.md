@@ -5,7 +5,7 @@ hide:
 
 # Equity Research
 
-<p class="lede">Company-specific deep dives — structured analysis, not surface-level coverage.</p>
+<p class="lede">Company-specific deep dives &mdash; structured analysis, not surface-level coverage.</p>
 
 <div class="gold-rule"></div>
 
@@ -15,34 +15,36 @@ hide:
 
 | Company | Report | Date | Price (Upload) | Price (Live) | Change |
 |---|---|---|---:|---:|---:|
-| **Venus Pipes** | [Investment Memorandum](venus-pipes.html) | 9 Apr 2026 | &#x20B9;1,126 | <span id="price-VENUSPIPES">&mdash;</span> | <span id="change-VENUSPIPES">&mdash;</span> |
+| **Venus Pipes** | [Investment Memorandum](venus-pipes.html) | 9 Apr 2026 | &#x20B9;1,126 | <span id="price-VENUSPIPES"></span> | <span id="change-VENUSPIPES"></span> |
 
 </div>
 
 <script>
 (function() {
+  var EMDASH = String.fromCharCode(0x2014);
+  var RUPEE = String.fromCharCode(0x20B9);
   var symbols = [
-    { id: 'VENUSPIPES', query: 'VENUSPIPES.NS', uploadPrice: 1126 }
+    { id: "VENUSPIPES", symbol: "VENUSPIPES.NS", uploadPrice: 1126 }
   ];
   symbols.forEach(function(s) {
-    var priceEl = document.getElementById('price-' + s.id);
-    var changeEl = document.getElementById('change-' + s.id);
+    var priceEl = document.getElementById("price-" + s.id);
+    var changeEl = document.getElementById("change-" + s.id);
     if (!priceEl || !changeEl) return;
-    fetch('https://query1.finance.yahoo.com/v8/finance/chart/' + s.query + '?interval=1d&range=1d')
+    priceEl.textContent = EMDASH;
+    changeEl.textContent = EMDASH;
+    var base = "https://" + "query1.finance.yahoo.com" + "/v8/finance/chart/";
+    fetch(base + s.symbol)
       .then(function(r) { return r.json(); })
       .then(function(data) {
-        var meta = data.chart.result[0].meta;
-        var livePrice = meta.regularMarketPrice;
-        var pct = ((livePrice - s.uploadPrice) / s.uploadPrice * 100).toFixed(1);
-        priceEl.textContent = '&#x20B9;' + livePrice.toLocaleString('en-IN', {maximumFractionDigits: 0});
-        var sign = pct >= 0 ? '+' : '';
-        changeEl.textContent = sign + pct + '%';
-        changeEl.style.color = pct >= 0 ? '#4CAF50' : '#F44336';
+        var price = data.chart.result[0].meta.regularMarketPrice;
+        var priceStr = RUPEE + price.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        priceEl.textContent = priceStr;
+        var change = ((price - s.uploadPrice) / s.uploadPrice) * 100;
+        var sign = change >= 0 ? "+" : "";
+        changeEl.textContent = sign + change.toFixed(2) + "%";
+        changeEl.style.color = change >= 0 ? "#4ade80" : "#ef4444";
       })
-      .catch(function() {
-        priceEl.textContent = '&mdash;';
-        changeEl.textContent = '&mdash;';
-      });
+      .catch(function() { });
   });
 })();
 </script>
